@@ -188,7 +188,7 @@ button,input,select{font:inherit;color:inherit}
 /* ---------- map ---------- */
 .mapgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;border:3px solid var(--asphalt)}
 .map{background:#E9E9E1;position:relative;min-height:600px;overflow:hidden}
-.map svg{position:absolute;inset:0;width:100%;height:100%}
+.map > svg{position:absolute;inset:0;width:100%;height:100%}
 .maplist{background:var(--trim);border-left:3px solid var(--asphalt);display:flex;flex-direction:column}
 .maplist .tabs{display:flex;border-bottom:2px solid var(--asphalt)}
 .maplist .tabs button{flex:1;min-height:52px;border:0;background:none;font-weight:700;font-size:15px;cursor:pointer;border-right:2px solid var(--asphalt)}
@@ -389,7 +389,6 @@ button,input,select{font:inherit;color:inherit}
   .paper{max-width:100%;transform:rotate(.8deg)}
   .reel{max-width:300px}
   .map{min-height:450px}
-  .map svg{width:190%;left:-45%}
   .stop.compact .info{grid-template-columns:minmax(0,1fr)}
   .stop.compact .info .labels{grid-row:auto}
 }

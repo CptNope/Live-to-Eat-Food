@@ -216,7 +216,7 @@ All styles live in [`css/ltef.css`](css/ltef.css). Every component is plain, sem
 | Tina note | `.note`, `.note.flat`, `.verdict`, `.verdict.skip`, `.sig` | See [Tina's hand](#8-tinas-hand) |
 | Trust labels | `.lbl.tina`, `.lbl.verified`, `.lbl.unclaimed`, `.lbl.sponsored`, `.lbl.affiliate` | See [Trust and labels](#9-trust-and-labels) |
 | Video menu (Watch + Eat) | `.reel`, `.scrub`, `.onscreen` (`li.now` for the active row) | Each timestamp links a moment to the dish, Tina's line and an action; the last row is always the address with Directions |
-| Map | `.mapgrid`, `.map`, `.maplist`, `.ml-item` | Schematic SVG map plus a filterable list (Tina's picks, Open now, Near me) |
+| Map | `.mapgrid`, `.map`, `.maplist`, `.ml-item`, `.cluster`, `.map-label`, `.map-jump`, `.map-tools`, `.map-tip` | Schematic SVG map with pan and zoom, clusters and neighborhood jumps, plus a filterable list (Tina's picks, Everywhere, Saved) |
 | Guide cover | `.guide`, `.guide.big`, `.line`, `.line-plates`, `.line-labels` | Route line with house-number plates or meal/town stops |
 | Route stop | `.route`, `.stop`, `.stop.compact`, `.stop.sponsor`, `.pin` | Visited stops get photo and take; unvisited stops are compact rows; sponsored stops are hatched with a `$` plate |
 | Floor (place page) | `.floor`, `.take`, `.dishes`, `.door-floor`, `.facts`, `.actions`, `.fresh`, `.nearby` | Top floor, middle floor, street level |
@@ -355,11 +355,27 @@ Everything below runs in the browser with plain JavaScript (`js/app.js`) over on
 | The street | Home | Rebuilds as the sentence changes: houses rise in, siding follows the neighborhood, the lot at the end opens a "Suggest a place" form. |
 | Let Tina pick | Home, Explore | Picks one of her places that fits the sentence and shows her line, the address plate, Get there and Save. "Pick again" won't repeat the last pick, and says so when she's only posted one that fits. |
 | Save | Everywhere | Toggle on every house, row, pin card and post. A toast confirms; the Saved drawer lists everything saved with links and remove buttons. |
-| Map | Home, Explore | Tabs for Tina's picks, Everywhere and Saved. Pins and list rows select each other and open a card with Get there and Save. Keyboard-reachable pins. On phones Explore toggles List and Map. |
+| Map | Home, Explore | Pan, zoom, clusters, neighborhood jumps, previews, directions and a saved-places route. See below. |
 | Watch + Eat | Home | Pick a video; the on-screen menu (where, eat, verdict, go) updates, and each step can be jumped to. |
 | I've been here | Guide | Marks a stop as tried and fills the progress line ("You've tried 1 of 3"). |
 | Share | Place, Guide | Copies the page link and confirms with a toast. |
 | Sunday list | Home | Validates the email inline and confirms without sending anything. |
+
+### The map
+
+The map stays schematic (drive-time rings, painted neighborhood blocks, house-number pins), but it now behaves like a real map.
+
+- **Move around.** Drag to pan. Pinch, Ctrl + scroll (⌘ + scroll on a Mac) or double-click to zoom. The +, − and "show everything" buttons sit top right. Plain scrolling still scrolls the page; the map shows a hint instead of hijacking it. On phones one finger scrolls the page until you zoom in, then it pans the map.
+- **Pins keep their size.** Roads, labels and pins stay the same size on screen at every zoom, so zooming in spreads places apart instead of enlarging everything.
+- **Crowded streets cluster.** Pins that would touch merge into a numbered circle (from far out, most of Shrewsbury Street is one circle). Click one to zoom just far enough to separate it.
+- **Names appear when there's room.** From about 1.7× zoom, each pin gets a name tag placed where it won't cover another pin or tag.
+- **Previews.** Hover or focus a pin for its name, address and whether Tina has been. Hover a cluster to see what's inside it.
+- **Jump to a neighborhood.** Chips across the top (Canal District, Downtown, Shrewsbury Street, Park Ave, South Worcester, Shrewsbury, Leominster), or click a painted block or town plate. Dashed towns open a "not covered yet" card with a link to suggest a place.
+- **Get there.** A place's card links straight to Google Maps directions for its real address. "More" goes to its page or its Explore row.
+- **Plan a route.** In the Saved tab, "Plan a route" orders saved places nearest-first from downtown, draws the route with numbered stops, and opens the whole route in Google Maps.
+- **Explore keeps them in sync.** Changing the sentence dims places that don't match and fits the map to what's left. Hovering a row lights its pin (or its cluster), and clicking a pin marks its row.
+- **Links remember the pin.** Selecting a place adds `?pin=` to the address, so a shared link opens with that place selected.
+- **Keyboard and screen readers.** The map is one tab stop. Arrow keys move to the nearest pin in that direction, Enter opens a place or a cluster, + and − zoom, 0 shows everything, and Escape closes the card. Each pin is a labeled button, clusters list their places, and zooms and jumps are announced. `prefers-reduced-motion` turns the camera moves into cuts.
 
 ---
 
@@ -389,6 +405,10 @@ WCAG 2.1 AA.
 | Explore, desktop | Tina, desktop |
 |---|---|
 | ![Explore page, desktop](docs/screens/explore-desktop.jpg) | ![Tina page, desktop](docs/screens/tina-desktop.jpg) |
+
+| Map, zoomed into Shrewsbury Street | Map, a route through saved places |
+|---|---|
+| ![Map zoomed into Shrewsbury Street with name tags](docs/screens/map-zoomed.jpg) | ![Map with a numbered route through three saved places](docs/screens/map-route.jpg) |
 
 | Let Tina pick | Saved drawer |
 |---|---|
