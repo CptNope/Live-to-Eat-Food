@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=Permanent+Marker&display=swap">
 <link rel="stylesheet" href="css/ltef.css">
+<link rel="stylesheet" href="css/interactive.css">
 <meta name="robots" content="noindex">
 <meta name="description" content="American Flatbread Co, 85 Green St, Worcester: a Live to Eat Food place page concept.">
 <link rel="icon" href="assets/logos/ltef-avatar-mustard.svg" type="image/svg+xml">
@@ -34,15 +35,16 @@
 <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4.5" r="1.8"/><path d="m9 21 2.5-6.5L14 17v4M11.5 14.5l1-5L9 11v3M12.5 9.5l3 3 2.5.5"/></symbol>
 </svg>
 
-<p class="sample"><b>Concept sample.</b> Tina's words are excerpts from her TikTok post of May 28, 2025. Facts come from news coverage of the opening; hours aren't verified. Photo frames show art direction. <span class="concept-nav"><a href="index.html">Home</a> <a href="place.html">Place page</a> <a href="guide.html">Guide</a> <a href="brand.html">Brand book</a></span></p>
+<p class="sample"><b>Concept sample.</b> Tina's words are excerpts from her TikTok post of May 28, 2025. Facts come from news coverage of the opening; hours aren't verified. Photo frames show art direction. <span class="concept-nav"><a href="index.html">Home</a> <a href="explore.html">Explore</a> <a href="place.html">Place page</a> <a href="guide.html">Guide</a> <a href="tina.html">Tina</a> <a href="brand.html">Brand book</a></span></p>
 
 <header class="field f-brick clap">
   <div class="wrap">
     <div class="top">
       <a class="logo light" href="index.html" aria-label="Live to Eat Food, home"><span>LIVE</span><span>TO EAT</span><span>FOOD</span></a>
-      <nav class="nav" aria-label="Main"><a href="index.html">Discover</a><a href="index.html#map">Map</a><a href="guide.html">Guides</a><a href="index.html#watch">Watch + Eat</a><a href="index.html#people">Stories</a></nav>
+      <nav class="nav" aria-label="Main"><a href="index.html">Discover</a><a href="explore.html">Explore</a><a href="guide.html">Guides</a><a href="index.html#watch">Watch + Eat</a><a href="tina.html">Tina</a></nav>
       <div class="top-r">
-        <a class="iconbtn" href="#" style="border-color:var(--trim);color:var(--trim)"><svg class="ico"><use href="#i-save"/></svg><span class="l">Save this place</span></a>
+        <button class="iconbtn" type="button" data-share style="border-color:var(--trim);color:var(--trim)"><svg class="ico"><use href="#i-go"/></svg><span class="l">Share</span></button>
+        <button class="iconbtn" type="button" data-open-saved style="border-color:var(--trim);color:var(--trim)"><svg class="ico"><use href="#i-save"/></svg><span class="l">Saved</span><span class="count" data-saved-count>0</span></button>
       </div>
     </div>
     <div class="p-hero">
@@ -56,6 +58,7 @@
         <p style="margin:30px 0 0;display:flex;gap:12px;flex-wrap:wrap">
           <a class="btn light" href="#door"><svg class="ico"><use href="#i-turn"/></svg>Get there</a>
           <a class="btn ghost" href="https://www.tiktok.com/@livetoeatfoodie/video/7509509382808292651" style="color:var(--trim)"><svg class="ico"><use href="#i-play"/></svg>Watch Tina's visit</a>
+          <button class="savebtn btn" type="button" data-save="american-flatbread" aria-pressed="false" style="color:var(--trim)"><svg class="ico" aria-hidden="true"><use href="#i-save"/></svg><span class="save-label">Save</span></button>
         </p>
       </div>
       <div class="window thick" style="margin-bottom:-60px;position:relative;z-index:2">
@@ -137,9 +140,9 @@
     <div><h2 id="nearby-h">Nearby</h2><p class="fl-name">Next door</p></div>
     <div>
       <div class="nearby">
-        <a class="nb f-brick" href="#"><span class="n">82</span><span><h3>Bocado Tapas Wine Bar</h3><span class="meta">Winter St, Tina ate here</span></span></a>
-        <a class="nb f-brick" href="#"><span class="n">1</span><span><h3>Playa Bowls</h3><span class="meta">Green Island Blvd, Tina ate here</span></span></a>
-        <a class="nb f-mustard" href="#"><span class="n">72</span><span><h3>Volturno</h3><span class="meta">Shrewsbury St, pizza</span></span></a>
+        <a class="nb f-brick" href="explore.html#bocado"><span class="n">82</span><span><h3>Bocado Tapas Wine Bar</h3><span class="meta">Winter St, Tina ate here</span></span></a>
+        <a class="nb f-brick" href="explore.html#playa-bowls"><span class="n">1</span><span><h3>Playa Bowls</h3><span class="meta">Green Island Blvd, Tina ate here</span></span></a>
+        <a class="nb f-mustard" href="explore.html#volturno"><span class="n">72</span><span><h3>Volturno</h3><span class="meta">Shrewsbury St, pizza</span></span></a>
       </div>
       <div class="spons">
         <span class="lbl sponsored">Sponsored</span>
@@ -170,7 +173,9 @@
   <a href="#"><svg class="ico"><use href="#i-turn"/></svg>Directions</a>
   <a href="#"><svg class="ico"><use href="#i-menu"/></svg>Menu</a>
   <a href="#"><svg class="ico"><use href="#i-cal"/></svg>Book a lane</a>
-  <button type="button"><svg class="ico"><use href="#i-save"/></svg>Save</button>
+  <button type="button" data-save="american-flatbread" aria-pressed="false"><svg class="ico"><use href="#i-save"/></svg><span class="save-label">Save</span></button>
 </nav>
+<script src="js/places.js" defer></script>
+<script src="js/app.js" defer></script>
 </body>
 </html>

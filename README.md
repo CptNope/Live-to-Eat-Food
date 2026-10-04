@@ -8,7 +8,9 @@ This is not a food blog and not a smaller Yelp. Every screen answers one questio
 
 | Page | File | What it shows |
 |---|---|---|
-| Home | [`index.html`](index.html) | Craving sentence, Tina's latest find, this week's street of places, Watch + Eat, the map, guides, people, the Sunday list, the editorial policy, the owner path |
+| Home | [`index.html`](index.html) | A working craving sentence that rebuilds the street of places as you change it, Let Tina pick, Watch + Eat, the interactive map, guides, the Sunday list, the editorial policy, the owner path |
+| Explore | [`explore.html`](explore.html) | All 21 places: filter with the same sentence, sort, save, and jump any row onto the map |
+| Tina | [`tina.html`](tina.html) | Who Tina is, where she posts, her latest posts as saveable places, and how she picks |
 | Place page | [`place.html`](place.html) | A restaurant as a three-floor editorial feature (American Flatbread Co, 85 Green St) |
 | Guide | [`guide.html`](guide.html) | "New since 2025, and Tina's already been": three openings as a route of house numbers |
 | Brand book | [`brand.html`](brand.html) | The system on one page: idea, logo, color, type, Tina's hand, trust labels, components, photography, voice |
@@ -33,7 +35,7 @@ This is not a food blog and not a smaller Yelp. Every screen answers one questio
 10. [Photography and video](#10-photography-and-video)
 11. [Voice and copy](#11-voice-and-copy)
 12. [Iconography](#12-iconography)
-13. [Motion](#13-motion)
+13. [Motion and interaction](#13-motion-and-interaction)
 14. [Accessibility](#14-accessibility)
 15. [Screens](#15-screens)
 16. [Content, facts and sources](#16-content-facts-and-sources)
@@ -331,7 +333,7 @@ Icons sit beside a text label; play is the only icon-only control and carries an
 
 ---
 
-## 13. Motion
+## 13. Motion and interaction
 
 One authored moment per screen, from a visible resting state:
 
@@ -340,6 +342,24 @@ One authored moment per screen, from a visible resting state:
 - **Craving slot change:** the slot word crossfades (150ms) and the result count updates.
 
 No scroll-triggered entrances, no parallax on text, nothing hidden at rest. `prefers-reduced-motion` removes every transition.
+
+### What works in the concept
+
+Everything below runs in the browser with plain JavaScript (`js/app.js`) over one data file (`js/places.js`). Nothing is sent anywhere; saved places and "I've been here" marks live in the visitor's browser (`localStorage`).
+
+| Interaction | Where | Behavior |
+|---|---|---|
+| Craving sentence | Home, Explore | "I want [anything] in [Central Mass] with [anyone]." Each underlined word opens a listbox showing how many places each choice would leave. Arrow keys, Home/End, Enter and Escape all work. |
+| Only places Tina has been | Home, Explore | A switch. Off adds the places she hasn't been to yet, clearly labeled. |
+| Zero results | Home, Explore | The button reads "Nothing yet. Widen it to Central Mass" and resets place and company in one tap, keeping the craving. |
+| The street | Home | Rebuilds as the sentence changes: houses rise in, siding follows the neighborhood, the lot at the end opens a "Suggest a place" form. |
+| Let Tina pick | Home, Explore | Picks one of her places that fits the sentence and shows her line, the address plate, Get there and Save. "Pick again" won't repeat the last pick, and says so when she's only posted one that fits. |
+| Save | Everywhere | Toggle on every house, row, pin card and post. A toast confirms; the Saved drawer lists everything saved with links and remove buttons. |
+| Map | Home, Explore | Tabs for Tina's picks, Everywhere and Saved. Pins and list rows select each other and open a card with Get there and Save. Keyboard-reachable pins. On phones Explore toggles List and Map. |
+| Watch + Eat | Home | Pick a video; the on-screen menu (where, eat, verdict, go) updates, and each step can be jumped to. |
+| I've been here | Guide | Marks a stop as tried and fills the progress line ("You've tried 1 of 3"). |
+| Share | Place, Guide | Copies the page link and confirms with a toast. |
+| Sunday list | Home | Validates the email inline and confirms without sending anything. |
 
 ---
 
@@ -366,6 +386,14 @@ WCAG 2.1 AA.
 |---|---|
 | ![Place page, desktop](docs/screens/place-desktop.jpg) | ![Place page, phone](docs/screens/place-phone.jpg) |
 
+| Explore, desktop | Tina, desktop |
+|---|---|
+| ![Explore page, desktop](docs/screens/explore-desktop.jpg) | ![Tina page, desktop](docs/screens/tina-desktop.jpg) |
+
+| Let Tina pick | Saved drawer |
+|---|---|
+| ![Let Tina pick dialog](docs/screens/tina-pick.jpg) | ![Saved places drawer](docs/screens/saved-drawer.jpg) |
+
 | "New since 2025" guide | Brand book page |
 |---|---|
 | ![Guide page, desktop](docs/screens/guide-desktop.jpg) | ![Brand book page, desktop](docs/screens/brand-book.jpg) |
@@ -374,6 +402,8 @@ WCAG 2.1 AA.
 
 - **Home.** Discovery is a sentence, not a wall of filter pills. Tina's latest find leads. "Where Tina ate lately" is a street of uneven houses ending in an empty lot. Watch + Eat turns a reel into a timestamped menu. The map is schematic and branded, with towns on drive-time rings. Guides are routes. The Sunday list is a paper list. The editorial policy is a painted sign. The owner path sits quietly at the bottom.
 - **Place page.** Someone in the Canal District at 6:30 pm sees Tina's line first, then what's there, then the door: address plate, Directions, Menu, Book a lane, the facts and when they were checked. On phones the tab bar becomes a door bar.
+- **Explore.** The same sentence over every place on file. Tina's places carry her line in her hand; the rest carry one sourced fact and a dashed "Tina hasn't been yet" label, never an invented opinion.
+- **Tina.** Her accounts, her latest posts as places you can save, and the three rules she picks by.
 - **Guide.** Three recent openings Tina has posted about, in the order they opened, as a route of house numbers. The sponsored stop is hatched, smaller and off-route.
 
 ---
@@ -405,12 +435,28 @@ Not used: her YouTube video "The Ultimate Worcester Food Guide with Tina Vo" (Yo
 - Bocado Tapas Wine Bar, 82 Winter St — [OpenTable](https://www.opentable.ie/bocado-tapas-wine-bar-worcester)
 - Shrewsbury Street addresses (Volturno 72, VIA 89, Nuovo 92, 111 Chop House 111, Boulevard Diner 155) — [Discover Central MA](https://www.discovercentralma.org/articles/post/shrewsbury-street/)
 
+### Places Tina hasn't posted about (listed, no opinion)
+
+These fill out the map and Explore. Each shows a fact from the source, never a take.
+
+| Place | Address | Fact used | Source |
+|---|---|---|---|
+| Chashu Ramen + Izakaya | 38 Franklin St, Worcester | Ramen and izakaya, downtown | [Worcester Business Journal](https://www.wbjournal.com/article/chashu-ramen-izakaya-opens-in-worcester) |
+| Rio Viejo Cocina | 50 Franklin St, Worcester | Owner Jaime Avila started with the Taco Libre food truck | [Worcester Business Journal](https://wbjournal.com/article/new-mexican-restaurant-opens-in-worcester/) |
+| George's Coney Island Hot Dogs | 158 Southbridge St, Worcester | Open since 1918; neon sign from 1938 | [Fifty Plus Advocate](https://www.fiftyplusadvocate.com/2024/10/07/coney-island-hot-dogs-has-been-a-worcester-institution-for-more-than-a-century), [NBC Boston](https://www.nbcboston.com/news/local/georges-coney-island-in-worcester-to-restore-iconic-hot-dog-sign/3598633/) |
+| Boulevard Diner | 155 Shrewsbury St, Worcester | Worcester Lunch Car Company car no. 730, 1936 | [Wikipedia](https://en.wikipedia.org/wiki/Boulevard_Diner) |
+| Pho Dakao | 593 Park Ave, Worcester | Pho, noodle soups and vermicelli | [Allmenus](https://www.allmenus.com/ma/worcester/42524-pho-dakao/menu/) |
+| Baba Sushi | 309 Park Ave, Worcester | Sushi on Park Ave | [Toast](https://www.toasttab.com/local/order/baba-sushi-worcester-309-park-ave/item-_a0a14afd-6e53-48d7-8629-129c4314d6cb) |
+| Volturno, VIA Italian Table, Nuovo, 111 Chop House, Flying Rhino Café, Leo's Ristorante | Shrewsbury Street | Restaurant Row addresses | [Discover Central MA](https://www.discovercentralma.org/articles/post/shrewsbury-street/) |
+| Wormtown Brewery | 72 Shrewsbury St, Worcester | Shares the address with Volturno | [Wormtown Brewery](https://www.wormtownbrewery.com/worcester-taproom) |
+
 ### Still placeholder
 
 - Every photo and video still (shot briefs describe what to pull from her videos).
 - Watch + Eat timestamps (filled in when a video is imported).
 - What Tina ordered at American Flatbread, dish by dish.
-- The Stories interview, the sponsor, the result counts, and the drive-time rings (approximate). Map positions are schematic, not to scale.
+- Hours for every place (none are verified), and price bands where none is listed.
+- The Stories interview, the sponsor, and the drive-time rings (approximate). Map positions are schematic, not to scale.
 - Hours for American Flatbread Co (not verified).
 
 ## 17. Repository structure
@@ -418,11 +464,17 @@ Not used: her YouTube video "The Ultimate Worcester Food Guide with Tina Vo" (Yo
 ```
 .
 ├── index.html          Home concept
+├── explore.html        Every place, filterable, with the map
+├── tina.html           About Tina and her latest posts
 ├── place.html          Place page concept (American Flatbread Co)
 ├── guide.html          Guide concept (New since 2025)
 ├── brand.html          Brand book page
 ├── css/
-│   └── ltef.css        All tokens and component styles
+│   ├── ltef.css        All tokens and component styles
+│   └── interactive.css Save, drawer, dialog, listbox, street, map pins, explore, Tina page
+├── js/
+│   ├── places.js       The data: 21 places, areas, cravings, Tina's posts, video moments
+│   └── app.js          All interactions (vanilla JS, no dependencies)
 ├── assets/logos/       Outlined SVG logo files
 ├── design/
 │   └── tokens.json     Color, type, spacing, radius and border tokens
@@ -430,7 +482,7 @@ Not used: her YouTube video "The Ultimate Worcester Food Guide with Tina Vo" (Yo
 └── .nojekyll           Serve files as-is on GitHub Pages
 ```
 
-**Run locally:** open `index.html` in a browser, or serve the folder (`python3 -m http.server`) and visit `http://localhost:8000`. No build step, no JavaScript dependencies. Fonts load from Google Fonts.
+**Run locally:** open `index.html` in a browser, or serve the folder (`python3 -m http.server`) and visit `http://localhost:8000`. No build step and no dependencies. The street, map pins, Explore rows and Tina's feed are drawn by `js/app.js` from `js/places.js`, so JavaScript needs to be on. To add a place, add an entry to `js/places.js`. Fonts load from Google Fonts.
 
 **GitHub Pages:** Settings → Pages → Deploy from a branch → `main` / `(root)`.
 
@@ -442,6 +494,7 @@ The concept is static HTML on purpose: the design is proven before any CMS decis
 
 - **Theme:** a block theme. Map `design/tokens.json` into `theme.json` (`settings.color.palette`, `settings.typography.fontFamilies` and `fontSizes`, `settings.spacing.spacingSizes`), and keep `css/ltef.css` component rules as block styles and patterns.
 - **Content model** (custom post types and taxonomies): Restaurants (address, street number, area, cuisine, price band, hours, menu/reserve/order URLs, claim status, last-verified date), Tina's takes and dish verdicts, Videos (with timestamped moments linked to dishes), Guides (ordered stops), People stories, Events, Towns/Neighborhoods (each with its siding color), Cuisines.
+- **Interactions:** `js/places.js` mirrors the content model, so `js/app.js` can move to a block theme's view script reading the same fields from the REST API.
 - **Patterns:** House, Address plate, Craving sentence, Watch + Eat menu, Route stop, Policy sign, Sunday list signup.
 - **Rules to enforce in the editor:** sponsored blocks can't use the Tina note style; "Tina ate here" requires a visit date; Restaurant schema (`schema.org/Restaurant`) generated from the same fields shown on the page.
 
