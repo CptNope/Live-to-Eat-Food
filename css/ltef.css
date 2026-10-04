@@ -434,3 +434,15 @@ button,input,select{font:inherit;color:inherit}
 .sample{flex-wrap:wrap}
 .concept-nav{display:inline-flex;gap:14px;flex-wrap:wrap;margin-left:8px}
 .concept-nav a{color:var(--mustard);font-weight:700;text-decoration:underline;text-underline-offset:.2em}
+
+/* ---------- faded siding for towns outside Worcester ---------- */
+.f-bluelt{background:var(--blue-lt);color:var(--asphalt)}
+.f-greenlt{background:var(--green-lt);color:var(--asphalt)}
+.f-bricklt{background:var(--brick-lt);color:var(--asphalt)}
+.house.f-bluelt,.house.f-greenlt,.house.f-bricklt{color:var(--asphalt);background-image:var(--clap)}
+.house .note small a,.note small a{color:inherit}
+a.ph{text-decoration:none}
+.reel .play{text-decoration:none}
+.reel-row a.ph{width:92px;min-height:0}
+@media (max-width:760px){.reel-row a.ph{width:auto;flex:1}}
+@media (max-width:760px){.latest{margin-bottom:0}}

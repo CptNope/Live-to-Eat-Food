@@ -9,11 +9,11 @@ This is not a food blog and not a smaller Yelp. Every screen answers one questio
 | Page | File | What it shows |
 |---|---|---|
 | Home | [`index.html`](index.html) | Craving sentence, Tina's latest find, this week's street of places, Watch + Eat, the map, guides, people, the Sunday list, the editorial policy, the owner path |
-| Place page | [`place.html`](place.html) | A restaurant as a three-floor editorial feature (Chashu Ramen + Izakaya, 38 Franklin St) |
-| Guide | [`guide.html`](guide.html) | "Where to eat along Shrewsbury Street" as a route of house numbers |
+| Place page | [`place.html`](place.html) | A restaurant as a three-floor editorial feature (American Flatbread Co, 85 Green St) |
+| Guide | [`guide.html`](guide.html) | "New since 2025, and Tina's already been": three openings as a route of house numbers |
 | Brand book | [`brand.html`](brand.html) | The system on one page: idea, logo, color, type, Tina's hand, trust labels, components, photography, voice |
 
-> **Concept status.** Restaurants, addresses and listed facts are real Worcester places. Every Tina note, take, verdict and "Tina ate here" label is a **placeholder** and is marked on the page. Photo frames are art-direction placeholders, not photos. Pages carry `noindex` so the concept doesn't appear in search results.
+> **Concept status.** Tina's notes are short excerpts from her own public TikTok captions, each linked to the original post. Restaurants, addresses and facts are real and sourced below. Photo frames are art-direction placeholders, not photos. Pages carry `noindex` so the concept doesn't appear in search results.
 
 ![Home, desktop, first view](docs/screens/home-desktop-first-view.jpg)
 
@@ -230,7 +230,7 @@ All styles live in [`css/ltef.css`](css/ltef.css). Every component is plain, sem
 Tina is the reason anyone trusts this site, so her presence is a design material, not a byline. It appears in three ways only.
 
 **The note.** One line in Permanent Marker, `tina` red, on a scrap of `trim` paper rotated about -2°.
-- Ten words or fewer. It says what to do: "Get the Brussels sprouts. Trust me." beats "This place was amazing!"
+- A short line in her own words, lifted from her post or video caption and linked to it: "Please don't crowd the place cause I wanna go back." Never invented for her.
 - One note per view, top floor only, always on trim paper, always also real text in the page.
 
 **The verdict.** Replaces stars. Words or nothing.
@@ -366,41 +366,60 @@ WCAG 2.1 AA.
 |---|---|
 | ![Place page, desktop](docs/screens/place-desktop.jpg) | ![Place page, phone](docs/screens/place-phone.jpg) |
 
-| Shrewsbury Street guide | Brand book page |
+| "New since 2025" guide | Brand book page |
 |---|---|
 | ![Guide page, desktop](docs/screens/guide-desktop.jpg) | ![Brand book page, desktop](docs/screens/brand-book.jpg) |
 
 ### What each screen proves
 
-- **Home.** Discovery is a sentence, not a wall of filter pills. Tina's latest find leads. "Where Tina ate this week" is a street of uneven houses ending in an empty lot. Watch + Eat turns a reel into a timestamped menu. The map is schematic and branded, with towns on drive-time rings. Guides are routes. The Sunday list is a paper list. The editorial policy is a painted sign. The owner path sits quietly at the bottom.
-- **Place page.** Someone downtown at 6:30 pm sees Tina's verdict first, then what she ordered, then the door: address plate, Directions, Call, Menu, Reserve, hours, price band and when the facts were checked. On phones the tab bar becomes a door bar.
-- **Guide.** A real street walked in house-number order. Visited stops get the full treatment; unvisited stops are honest compact rows; a sponsored stop is hatched, smaller and off-route.
+- **Home.** Discovery is a sentence, not a wall of filter pills. Tina's latest find leads. "Where Tina ate lately" is a street of uneven houses ending in an empty lot. Watch + Eat turns a reel into a timestamped menu. The map is schematic and branded, with towns on drive-time rings. Guides are routes. The Sunday list is a paper list. The editorial policy is a painted sign. The owner path sits quietly at the bottom.
+- **Place page.** Someone in the Canal District at 6:30 pm sees Tina's line first, then what's there, then the door: address plate, Directions, Menu, Book a lane, the facts and when they were checked. On phones the tab bar becomes a door bar.
+- **Guide.** Three recent openings Tina has posted about, in the order they opened, as a route of house numbers. The sponsored stop is hatched, smaller and off-route.
 
 ---
 
 ## 16. Content, facts and sources
 
-**Real (from public listings, verify before showing anyone outside the team):**
-- Chashu Ramen + Izakaya, 38 Franklin St: hours, price band ($31–50), phone (508) 304-7183 — [OpenTable](https://www.opentable.ie/r/chashu-ramen-and-izakaya-worcester)
-- Bocado Tapas Wine Bar, 82 Winter St, $30 and under — [OpenTable](https://www.opentable.ie/bocado-tapas-wine-bar-worcester)
-- Baba Sushi, 309 Park Ave — [Toast](https://www.toasttab.com/local/order/baba-sushi-worcester-309-park-ave/item-_a0a14afd-6e53-48d7-8629-129c4314d6cb)
-- Shrewsbury Street stops: Volturno and Wormtown Brewery (72), VIA Italian Table (89), Nuovo (92), 111 Chop House (111), Boulevard Diner (155), Flying Rhino Café (278) — [Discover Central MA](https://www.discovercentralma.org/articles/post/shrewsbury-street/). Check each is still open.
-- Boulevard Diner built 1936 by the Worcester Lunch Car Company, car no. 730 — [Wikipedia](https://en.wikipedia.org/wiki/Boulevard_Diner)
-- Vejigante (Puerto Rican, Worcester) — [OpenTable](https://www.opentable.ie/cuisine/best-caribbean-restaurants-shrewsbury-ma)
+### Tina's posts used on the site
 
-**Placeholders (marked on every page):** every Tina note, take, verdict, visit date and "Tina ate here" label; the people story interview; the sponsor; the Sunday list items; parking notes; the result count in "Show me 9 places"; the drive-time rings (approximate). Map positions are schematic, not to scale.
+Her words appear only as short excerpts from her public TikTok captions, linked to the post. Dates are decoded from each post's ID. Instagram, TikTok and YouTube block automated reading, so these came from search-engine indexes of her captions; her own analytics or an export would give many more.
 
-**To replace with real material:** Tina's actual takes and visit dates, her photos and video (4:5, 4:3, 1:1, 3:2, 9:16 per the table above), storefront photos, owner interviews with permission.
+| Place | Address | Tina's line (excerpt) | Post |
+|---|---|---|---|
+| Hungry Bowl | 865 Merriam Ave, Leominster | "It's un-bowl-ievable that I've never tried Mongolian BBQ before." | [TikTok, Feb 2026](https://www.tiktok.com/@livetoeatfoodie/video/7604965242379996430) |
+| American Flatbread Co | 85 Green St, Worcester 01604 | "Please don't crowd the place cause I wanna go back." | [TikTok, May 2025](https://www.tiktok.com/@livetoeatfoodie/video/7509509382808292651) |
+| Racha Thai | 545 Southwest Cutoff, Worcester | "Our favorite Thai place in Worcester has to be Racha Thai" | [TikTok, Mar 2025](https://www.tiktok.com/@livetoeatfoodie/video/7486636461693979946) |
+| honeygrow | 193 Boston Turnpike, Shrewsbury | "Ca-noodling around with some honeygrow - what's your order??" | [TikTok, Jul 2025](https://www.tiktok.com/@livetoeatfoodie/video/7532590916696132919) |
+| Ground Round | 271 Grafton St, Shrewsbury | "We found the most well rounded menu at Ground Round!" | [TikTok, Sept 2025](https://www.tiktok.com/@livetoeatfoodie/video/7554878364746648846) |
+| Playa Bowls | 1 Green Island Blvd, Worcester | "Quit playa-ing around" | [TikTok, Oct 2025](https://www.tiktok.com/@livetoeatfoodie/video/7558980619980541197) |
+| Panda Buffet | Worcester (address not confirmed) | "an average buffet…and I'm still gonna eat there sometimes" | [TikTok, Aug 2025](https://www.tiktok.com/@livetoeatfoodie/video/7537763472541584653) |
+| Bocado Tapas Wine Bar | 82 Winter St, Worcester | Featured on her Instagram (from the strategy research) | [Instagram](https://www.instagram.com/livetoeatfood/) |
 
----
+Not used: her YouTube video "The Ultimate Worcester Food Guide with Tina Vo" (YouTube rate-limited the request, so its contents weren't read), and Wholly Cannoli, which closed in 2024.
+
+### Facts from other sources
+
+- American Flatbread Co: opened May 2025 inside The Cove in the Canal District; 10 candlepin lanes downstairs, restaurant upstairs; wood-fired flatbreads, salads, ice cream; 10 New England drafts; lanes $35 an hour at opening; first public candlepin in Worcester since Colonial Bowling closed in May 2020 — [Worcester Business Journal](https://www.wbjournal.com/article/candlepin-bowling-returns-to-worcester-as-american-flatbread-set-to-open-on-saturday), [Spectrum News](https://spectrumnews1.com/ma/worcester/news/2025/05/15/american-flatbread-candlepin-bowling-051525) (also the source for candlepin's 1880 Worcester origin).
+- honeygrow Shrewsbury: 193 Boston Turnpike, Lakeway Commons, opened July 7, 2025 — [QSR Magazine](https://www.qsrmagazine.com/news/honeygrow-opens-in-shrewsbury-massachusetts/)
+- Racha Thai: 545 Southwest Cutoff #2, The Worcester Fair; price range $15–30 — [Toast](https://toast.app/r/racha-thai-worcester)
+- Bocado Tapas Wine Bar, 82 Winter St — [OpenTable](https://www.opentable.ie/bocado-tapas-wine-bar-worcester)
+- Shrewsbury Street addresses (Volturno 72, VIA 89, Nuovo 92, 111 Chop House 111, Boulevard Diner 155) — [Discover Central MA](https://www.discovercentralma.org/articles/post/shrewsbury-street/)
+
+### Still placeholder
+
+- Every photo and video still (shot briefs describe what to pull from her videos).
+- Watch + Eat timestamps (filled in when a video is imported).
+- What Tina ordered at American Flatbread, dish by dish.
+- The Stories interview, the sponsor, the result counts, and the drive-time rings (approximate). Map positions are schematic, not to scale.
+- Hours for American Flatbread Co (not verified).
 
 ## 17. Repository structure
 
 ```
 .
 ├── index.html          Home concept
-├── place.html          Place page concept (Chashu Ramen + Izakaya)
-├── guide.html          Guide concept (Shrewsbury Street)
+├── place.html          Place page concept (American Flatbread Co)
+├── guide.html          Guide concept (New since 2025)
 ├── brand.html          Brand book page
 ├── css/
 │   └── ltef.css        All tokens and component styles
