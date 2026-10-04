@@ -279,3 +279,18 @@ dialog::backdrop{background:rgba(30,31,28,.55)}
 @media(max-width:720px){.feed{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
 .feed{align-items:stretch}.post{display:flex;flex-direction:column;gap:12px}.post-acts{margin-top:auto}
 .post-next{padding:24px;justify-content:flex-end;min-height:320px;color:var(--asphalt)}.post-next .d-s{font-size:26px;margin:0}.post-next .body{margin:0}.post-next .btn{align-self:flex-start}
+
+/* ---------- real photos and Tina's videos ---------- */
+.ph.has-photo,.ph.has-video{background:#262723}
+.ph.has-photo::before,.ph.has-photo::after,.ph.has-video::before,.ph.has-video::after{display:none}
+.ph.has-photo .cap,.ph.has-photo .tag,.ph.has-video .cap,.ph.has-video .tag{display:none}
+.ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+.ph-credit{position:absolute;right:6px;bottom:6px;max-width:calc(100% - 12px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px;font-weight:600;line-height:1.5;padding:1px 6px;background:rgba(20,20,18,.62);color:#F6F6F1;text-decoration:none;z-index:1}
+.ph-credit:hover,.ph-credit:focus-visible{text-decoration:underline;background:rgba(20,20,18,.85)}
+.ph-stand{position:absolute;left:6px;top:6px;font-size:10.5px;font-weight:800;letter-spacing:.02em;padding:2px 6px;background:var(--trim);color:var(--asphalt);border:1.5px solid var(--asphalt);z-index:1}
+.tt-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.ph.has-video{padding:0}
+.reel.has-video .play{display:none}
+.post .ph.has-video + .note{margin-top:10px}
+.house .ph-credit{font-size:9.5px;right:4px;bottom:4px}
+.house .ph-stand{font-size:9.5px;left:4px;top:4px}

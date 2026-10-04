@@ -97,6 +97,44 @@
     if (!p.num) return '<span class="plate ' + (cls || "") + ' plate-none" aria-hidden="true"><span class="n">&mdash;</span></span>';
     return '<span class="plate ' + (cls || "") + '" aria-hidden="true"><span class="n">' + esc(p.num) + "</span></span>";
   }
+  /* photos (Wikimedia Commons, credited) and Tina's videos (TikTok's own player) */
+  function photoInner(key, place, elsewhere) {
+    var ph = (D.photos || {})[key];
+    if (!ph) return "";
+    var stand = !ph.real || elsewhere;
+    var alt = ph.what + (stand && place ? ". Stand-in photo, not taken at " + place.name : "");
+    return '<img class="ph-img" src="' + ph.src + '" alt="' + esc(alt) + '" loading="lazy" decoding="async">' +
+      (stand ? '<span class="ph-stand" title="' + esc(ph.what) + ', taken elsewhere">Stand-in</span>' : "") +
+      '<a class="ph-credit" href="' + ph.page + '" target="_blank" rel="noopener" title="' + esc(ph.what) + '">' + esc(ph.by) + ", " + esc(ph.lic) + "</a>";
+  }
+  function placePhotoHtml(p) { return photoInner((D.placePhoto || {})[p.id], p); }
+  function hydratePhotos(root) {
+    $$("[data-photo]", root).forEach(function (el) {
+      if (el.classList.contains("has-photo")) return;
+      var html = photoInner(el.getAttribute("data-photo"), byId[el.getAttribute("data-place")], el.hasAttribute("data-elsewhere"));
+      if (!html) return;
+      el.classList.add("has-photo");
+      el.insertAdjacentHTML("afterbegin", html);
+    });
+  }
+  function tiktokId(url) { var m = /video\/(\d+)/.exec(url || ""); return m ? m[1] : null; }
+  function tiktokFrame(url, title) {
+    var id = tiktokId(url);
+    if (!id) return "";
+    return '<iframe class="tt-frame" src="https://www.tiktok.com/player/v1/' + id + '?music_info=0&amp;description=0&amp;rel=0&amp;native_context_menu=0&amp;closed_caption=1" title="' + esc(title || "Tina's TikTok video") + '" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+  }
+  function hydrateVideos(root) {
+    $$("[data-tiktok]", root).forEach(function (el) {
+      if (el.classList.contains("has-video")) return;
+      var html = tiktokFrame(el.getAttribute("data-tiktok"), el.getAttribute("data-title"));
+      if (!html) return;
+      el.classList.add("has-video");
+      el.insertAdjacentHTML("beforeend", html);
+    });
+  }
+  hydratePhotos(document);
+  hydrateVideos(document);
+
   function tinaLabel(p) {
     return p.tina ? '<span class="lbl tina">Tina ate here <em>' + esc(p.tina.date) + "</em></span>" : '<span class="lbl unclaimed">Tina hasn\'t been yet</span>';
   }
@@ -285,7 +323,7 @@
       '<article class="house f-' + a.siding + '">' +
       '<div class="roof"></div>' +
       '<div class="fl top">' + top + "</div>" +
-      '<div class="fl mid"><div class="window"><div class="ph ' + p.tone + ' ratio-43"><p class="cap"><b>Photo: ' + esc(p.dish) + "</b></p></div></div></div>" +
+      '<div class="fl mid"><div class="window"><div class="ph ' + p.tone + ' ratio-43' + (placePhotoHtml(p) ? " has-photo" : "") + '">' + placePhotoHtml(p) + '<p class="cap"><b>' + esc(p.dish) + "</b></p></div></div></div>" +
       '<div class="fl door"><div><h3 class="nm"><a href="' + placeHref(p) + '">' + esc(p.name) + '</a></h3><p class="meta">' + esc(p.cuisine) + (p.price ? ", " + esc(p.price) : "") + "</p>" +
       '<div class="door-acts"><a class="door-go" href="' + placeHref(p) + '">' + icon("i-turn") + "Get there</a>" + saveBtn(p, "mini") + "</div></div>" +
       '<span class="n">' + (p.num ? esc(p.num) : "") + "</span></div></article>" +
@@ -1127,8 +1165,11 @@
       vid = v;
       $("[data-reel-tag]", watch).textContent = "Tina's TikTok, " + v.date;
       $("[data-reel-title]", watch).textContent = "Video: " + v.title;
-      var ph = $(".reel .ph", watch);
-      ph.className = "ph t-night ratio-916";
+      var ph = $("[data-reel-frame]", watch), fr = $(".tt-frame", ph);
+      ph.classList.add("has-video");
+      if (fr) fr.remove();
+      ph.insertAdjacentHTML("beforeend", tiktokFrame(v.url, "Tina's TikTok: " + v.title));
+      $(".reel", watch).classList.add("has-video");
       $("[data-reel-play]", watch).setAttribute("href", v.url);
       $("[data-reel-play]", watch).setAttribute("aria-label", "Play Tina's " + v.title + " video on TikTok");
       thumbs.forEach(function (t) { t.setAttribute("aria-pressed", t.getAttribute("data-video") === v.id); });
@@ -1265,7 +1306,8 @@
     var posts = D.places.filter(function (p) { return p.tina && !p.tina.noQuote; }).sort(function (a, b) { return b.tina.sort - a.tina.sort; });
     feed.innerHTML = posts.map(function (p, i) {
       return '<article class="post">' +
-        '<a class="ph ' + p.tone + ' ratio-916" href="' + p.tina.url + '"><span class="tag">' + esc(p.tina.platform) + ", " + esc(p.tina.date) + '</span><span class="post-play" aria-hidden="true"><svg><use href="#i-play"></use></svg></span><span class="sr">Watch Tina\'s ' + esc(p.name) + " video</span></a>" +
+        (tiktokId(p.tina.url) ? '<div class="ph ' + p.tone + ' ratio-916 has-video">' + tiktokFrame(p.tina.url, "Tina's TikTok at " + p.name) + "</div>"
+          : '<a class="ph ' + p.tone + ' ratio-916" href="' + p.tina.url + '"><span class="tag">' + esc(p.tina.platform) + ", " + esc(p.tina.date) + '</span><span class="post-play" aria-hidden="true"><svg><use href="#i-play"></use></svg></span><span class="sr">Watch Tina\'s ' + esc(p.name) + " video</span></a>") +
         '<p class="note flat">' + esc(p.tina.quote) + "</p>" +
         '<p class="post-place"><b>' + esc(p.name) + '</b><span class="meta">' + esc(address(p)) + ", " + esc(area(p).name) + "</span></p>" +
         '<div class="post-acts">' + (p.num ? '<a class="door-go" href="' + placeHref(p) + '">' + icon("i-turn") + "Get there</a>" : "") + saveBtn(p, "mini") + "</div></article>";
