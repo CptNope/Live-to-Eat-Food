@@ -15,7 +15,7 @@ This is not a food blog and not a smaller Yelp. Every screen answers one questio
 | Guide | [`guide.html`](guide.html) | "New since 2025, and Tina's already been": three openings as a route of house numbers |
 | Brand book | [`brand.html`](brand.html) | The system on one page: idea, logo, color, type, Tina's hand, trust labels, components, photography, voice |
 
-> **Concept status.** Tina's notes are short excerpts from her own public TikTok captions, each linked to the original post. Restaurants, addresses and facts are real and sourced below. Photo frames are art-direction placeholders, not photos. Pages carry `noindex` so the concept doesn't appear in search results.
+> **Concept status.** Tina's notes are short excerpts from her own public TikTok captions, each linked to the original post. Restaurants, addresses and facts are real and sourced below. Photos are openly licensed from Wikimedia Commons and credited on each image; dish photos badged **Stand-in** were taken somewhere else. Tina's videos play in TikTok's own embed player. Pages carry `noindex` so the concept doesn't appear in search results.
 
 ![Home, desktop, first view](docs/screens/home-desktop-first-view.jpg)
 
@@ -212,7 +212,7 @@ All styles live in [`css/ltef.css`](css/ltef.css). Every component is plain, sem
 | Address plate | `.plate`, `.plate.light`, `.plate.lg` | Number plus optional street; links to the place or directions |
 | House (place module) | `.house` + `.roof`, `.fl.top`, `.fl.mid`, `.fl.door`, `.door-go`; `.lot`; `.curb` | Take on top, food in the middle, door at street level. Siding from the place's area |
 | Craving sentence | `.sentence`, `.slot`, `.crave-actions`, `.shortcuts` | "I want [something spicy] in [Worcester] for [under $25], [tonight]." Slots are real buttons with `aria-haspopup="listbox"`; the action names the live result count |
-| Photo window | `.window`, `.window.thick`, `.ph` + dish tone (`.t-broth`, `.t-chili`, `.t-pie`, `.t-tuna`, `.t-green`, `.t-saffron`, `.t-diner`, `.t-night`, `.t-room`, `.t-cream`), ratio (`.ratio-45`, `-43`, `-11`, `-32`, `-916`) | Placeholder shows ratio and a one-line shot brief |
+| Photo window | `.window`, `.window.thick`, `.ph` + dish tone (`.t-broth`, `.t-chili`, `.t-pie`, `.t-tuna`, `.t-green`, `.t-saffron`, `.t-diner`, `.t-night`, `.t-room`, `.t-cream`), ratio (`.ratio-45`, `-43`, `-11`, `-32`, `-916`); `data-photo` / `data-tiktok` fill it (`.has-photo`, `.ph-credit`, `.ph-stand`, `.has-video`) | Without a photo it shows the ratio and a one-line shot brief |
 | Tina note | `.note`, `.note.flat`, `.verdict`, `.verdict.skip`, `.sig` | See [Tina's hand](#8-tinas-hand) |
 | Trust labels | `.lbl.tina`, `.lbl.verified`, `.lbl.unclaimed`, `.lbl.sponsored`, `.lbl.affiliate` | See [Trust and labels](#9-trust-and-labels) |
 | Video menu (Watch + Eat) | `.reel`, `.scrub`, `.onscreen` (`li.now` for the active row) | Each timestamp links a moment to the dish, Tina's line and an action; the last row is always the address with Directions |
@@ -289,7 +289,10 @@ Food is the hero, and the photo is a window into the room.
 
 - No filters, no grading toward a brand color, no vignettes. No text on food photos except Tina's paper note.
 - Casing: 8px `trim` on cards, 12px on heroes; `trim-2` casing on trim fields.
-- **Placeholders** (used throughout this concept): a field in the dish's own color, a dashed inner frame, the ratio, and a one-line shot brief. Never stock photos of other restaurants; never generated images of Tina.
+- **In production:** only Tina's own photos and video stills, or the restaurant's photos used with permission. Never stock photos of other restaurants presented as this one; never generated images of Tina.
+- **In this concept:** openly licensed Wikimedia Commons photos (see [Photo credits](#photo-credits)). Real photos of the actual place where Commons has one; otherwise a photo of the same kind of dish taken elsewhere, always badged **Stand-in**, credited, and described as a stand-in in its alt text. Without JavaScript, the original placeholder (dish-colored field, ratio, shot brief) still shows.
+- **Tina's videos** play in TikTok's own embed player (`tiktok.com/player/v1/<id>`), so views and credit stay with her account. The player loads only when it scrolls near the screen.
+- **Credit** sits on every photo: author and license, linking to the file's Commons page.
 - **Alt text** names the dish and the place: "Neapolitan pizza at Volturno, 72 Shrewsbury St."
 
 ---
@@ -394,6 +397,24 @@ WCAG 2.1 AA.
 
 ## 15. Screens
 
+### With photos and Tina's videos (live site)
+
+The screenshots further down were taken offline, so they still show the art-direction placeholders. These are from the live site:
+
+| Home: Tina's latest find | Home: the street |
+|---|---|
+| ![Home hero with Tina's Hungry Bowl TikTok](docs/screens/live-home-hero.jpg) | ![Street of houses with credited photos](docs/screens/live-street.jpg) |
+
+| Watch + Eat | Place page |
+|---|---|
+| ![Watch + Eat with Tina's American Flatbread video](docs/screens/live-watch.jpg) | ![American Flatbread place page with a stand-in photo](docs/screens/live-place.jpg) |
+
+| Tina page feed | Guide |
+|---|---|
+| ![Tina's latest TikTok posts](docs/screens/live-tina-feed.jpg) | ![Guide stops with credited photos](docs/screens/live-guide.jpg) |
+
+### Layout screens
+
 | Home, desktop | Home, phone |
 |---|---|
 | ![Home page, full length, desktop](docs/screens/home-desktop-full.jpg) | ![Home page, first view, phone](docs/screens/home-phone.jpg) |
@@ -470,9 +491,42 @@ These fill out the map and Explore. Each shows a fact from the source, never a t
 | Volturno, VIA Italian Table, Nuovo, 111 Chop House, Flying Rhino Café, Leo's Ristorante | Shrewsbury Street | Restaurant Row addresses | [Discover Central MA](https://www.discovercentralma.org/articles/post/shrewsbury-street/) |
 | Wormtown Brewery | 72 Shrewsbury St, Worcester | Shares the address with Volturno | [Wormtown Brewery](https://www.wormtownbrewery.com/worcester-taproom) |
 
+### Photo credits
+
+All photos are from [Wikimedia Commons](https://commons.wikimedia.org/) and are linked straight from Wikimedia's image servers (`js/photos.js`). For a production site, download them (or better, replace them with Tina's) and serve them from the site itself.
+
+| Photo | Used for | Real or stand-in | Author | License |
+|---|---|---|---|---|
+| [Boulevard Diner, Worcester Massachusetts](https://commons.wikimedia.org/wiki/File:Boulevard_Diner,_Worcester_Massachusetts.jpg) | Boulevard Diner | Real | Kenneth C. Zirkel | CC BY-SA 4.0 |
+| [50 Franklin Street (Bancroft on The Grid)](https://commons.wikimedia.org/wiki/File:50_Franklin_Street_(Bancroft_on_The_Grid)_-_Worcester,_MA_-_DSC04078.jpg) | Rio Viejo Cocina (its address) | Real | Daderot | CC0 |
+| [Kelley Square, Worcester, September 2024](https://commons.wikimedia.org/wiki/File:Kelley_Square,_Worcester,_September_2024.jpg) | Place page, the neighborhood | Real | Pi.1415926535 | CC BY-SA 4.0 |
+| [Candlepin lanes with balls being returned, Bayberry](https://commons.wikimedia.org/wiki/File:Candlepin_lanes_with_balls_being_returned,_Bayberry_2026-02-28.jpg) | Stories feature; place page lanes | Real candlepin, other alley (badged) | Peter Cooper Jr. | CC0 |
+| [Pizza baking in Wood-fired oven](https://commons.wikimedia.org/wiki/File:Pizza_baking_in_Wood-fired_oven.jpg) | American Flatbread hero and house | Stand-in | Jared Tarbell | CC BY 2.0 |
+| [Tomato and garlic flatbread pizza at Trilussa](https://commons.wikimedia.org/wiki/File:Tomato_and_garlic_flatbread_pizza_at_Trilussa_(22011804006).jpg) | American Flatbread dish, guide | Stand-in | Ruth Hartnup | CC BY 2.0 |
+| [Coopers Original Pale Ale + beer taps](https://commons.wikimedia.org/wiki/File:Coopers_Original_Pale_Ale_%2B_beer_taps,_Buffalo_Club,_2026_(01).jpg) | Tap list; Wormtown Brewery | Stand-in | Bahnfrend | CC BY-SA 4.0 |
+| [Mongolian Barbeque 03](https://commons.wikimedia.org/wiki/File:Mongolian_Barbeque_03.JPG) | Hungry Bowl | Stand-in | Brücke-Osteuropa | Public domain |
+| [Red Curry with Chicken, Little Thai](https://commons.wikimedia.org/wiki/File:Red_Curry_with_Chicken_-_Little_Thai,_Brighton_2024-03-01.jpg) | Racha Thai | Stand-in | Andy Li | CC0 |
+| [Spicy King Prawn Stir-Fry Udon](https://commons.wikimedia.org/wiki/File:Spicy_King_Prawn_Stir-Fry_Udon_-_Aberdeen_Seafood,_Brighton_2026-07-19.jpg) | honeygrow | Stand-in | Andy Li | CC0 |
+| [Hamburger and fries, Brownswood](https://commons.wikimedia.org/wiki/File:Hamburger_and_fries_-_Brownswood,_Finsbury_Park,_London.jpg) | Ground Round | Stand-in | Ewan Munro | CC BY-SA 2.0 |
+| [Berries Galore Acai Bowl](https://commons.wikimedia.org/wiki/File:Berries_Galore_Acai_Bowl_(30276166867).jpg) | Playa Bowls | Stand-in | Ella Olsson | CC BY 2.0 |
+| [Spanish Tapas](https://commons.wikimedia.org/wiki/File:Spanish_Tapas.jpg) | Bocado | Stand-in | Toben | CC BY-SA 4.0 |
+| [Super China Buffet 06](https://commons.wikimedia.org/wiki/File:Super_China_Buffet_-_November_2023_-_Sarah_Stierch_06.jpg) | Panda Buffet | Stand-in | Missvain (Sarah Stierch) | CC BY 4.0 |
+| [Tonkotsu ramen in Tokyo](https://commons.wikimedia.org/wiki/File:Tonkotsu_ramen_in_Tokyo.jpg) | Chashu Ramen + Izakaya | Stand-in | Syced | CC0 |
+| [Chili dogs](https://commons.wikimedia.org/wiki/File:Chili_dogs.jpg) | Coney Island Hot Dogs | Stand-in | jeffreyw | CC BY 2.0 |
+| [Beef noodle soup (Phở bò), Pho Hanoi Authentic](https://commons.wikimedia.org/wiki/File:Beef_noodle_soup_(Ph%E1%BB%9F_b%C3%B2)_-_Pho_Hanoi_Authentic_2024-12-01.jpg) | Pho Dakao | Stand-in | Andy Li | CC0 |
+| [Sushi platter, Nikko, Japan](https://commons.wikimedia.org/wiki/File:Sushi_platter,_Nikko,_Japan.jpg) | Baba Sushi | Stand-in | Joli Rumi | CC BY-SA 4.0 |
+| [Pizza napoletana](https://commons.wikimedia.org/wiki/File:Pizza-napoletana.jpg) | Volturno | Stand-in | Fabryx98 | CC BY-SA 4.0 |
+| [Rigatoni Alla Carbonara, Pinocchio](https://commons.wikimedia.org/wiki/File:Rigatoni_Alla_Carbonara_-_Pinocchio_2023-07-04.jpg) | VIA Italian Table | Stand-in | Andy Li | CC0 |
+| [Mezze Platter](https://commons.wikimedia.org/wiki/File:Mezze_Platter.jpg) | Nuovo | Stand-in | Satdeep Gill | CC BY-SA 4.0 |
+| [Minute steak at Manhattan Steak House](https://commons.wikimedia.org/wiki/File:Minute_steak_at_restaurant_Manhattan_Steak_House.jpg) | 111 Chop House | Stand-in | JIP | CC BY-SA 4.0 |
+| [Cheese meltdown beef burger](https://commons.wikimedia.org/wiki/File:Cheese_meltdown_beef_burger_-_The_Perkin_Warbeck_2025-07-26.jpg) | Flying Rhino Café | Stand-in | Andy Li | CC0 |
+| [Mamma Tanino's 08 (chicken parmigiana)](https://commons.wikimedia.org/wiki/File:Mamma_Tanino%27s_-_November_2024_-_Sarah_Stierch_08.jpg) | Leo's Ristorante | Stand-in | Missvain (Sarah Stierch) | CC0 |
+
+Tina's videos (all seven, by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/@livetoeatfoodie)) appear through TikTok's embed player on Home (latest find, Watch + Eat), the place page and the Tina page.
+
 ### Still placeholder
 
-- Every photo and video still (shot briefs describe what to pull from her videos).
+- Photos of the places themselves, except the Boulevard Diner, 50 Franklin St and Kelley Square. Everything badged Stand-in should be replaced with Tina's own shots.
 - Watch + Eat timestamps (filled in when a video is imported).
 - What Tina ordered at American Flatbread, dish by dish.
 - Hours for every place (none are verified), and price bands where none is listed.
@@ -494,6 +548,7 @@ These fill out the map and Explore. Each shows a fact from the source, never a t
 │   └── interactive.css Save, drawer, dialog, listbox, street, map pins, explore, Tina page
 ├── js/
 │   ├── places.js       The data: 21 places, areas, cravings, Tina's posts, video moments
+│   ├── photos.js       Credited Wikimedia Commons photos and which place shows which
 │   └── app.js          All interactions (vanilla JS, no dependencies)
 ├── assets/logos/       Outlined SVG logo files
 ├── design/
