@@ -11,6 +11,10 @@ This is not a food blog and not a smaller Yelp. Every screen answers one questio
 | Home | [`index.html`](index.html) | A working craving sentence that rebuilds the street of places as you change it, Let Tina pick, Watch + Eat, the interactive map, guides, the Sunday list, the editorial policy, the owner path |
 | Explore | [`explore.html`](explore.html) | All 21 places: filter with the same sentence, sort, save, and jump any row onto the map |
 | Tina | [`tina.html`](tina.html) | Who Tina is, where she posts, her latest posts as saveable places, and how she picks |
+| Guides | [`guides.html`](guides.html) | Every guide, with its stops listed |
+| Guide | [`guide.html?g=…`](guide.html?g=new) | One template for every guide: `new`, `shrewsbury-st`, `worth-the-drive` (data in `js/places.js`) |
+| About | [`about.html`](about.html) | Editorial policy, how Tina picks, food events, stories, contact |
+| For restaurants | [`owners.html`](owners.html) | Claim a listing, fix hours, tell us you're opening, invite Tina, advertise (labeled), work with us |
 | Place page | [`place.html`](place.html) | A restaurant as a three-floor editorial feature (American Flatbread Co, 85 Green St) |
 | Guide | [`guide.html`](guide.html) | "New since 2025, and Tina's already been": three openings as a route of house numbers |
 | Brand book | [`brand.html`](brand.html) | The system on one page: idea, logo, color, type, Tina's hand, trust labels, components, photography, voice |
@@ -362,6 +366,9 @@ Everything below runs in the browser with plain JavaScript (`js/app.js`) over on
 | Watch + Eat | Home | Pick a video; the on-screen menu (where, eat, verdict, go) updates, and each step can be jumped to. |
 | I've been here | Guide | Marks a stop as tried and fills the progress line ("You've tried 1 of 3"). |
 | Share | Place, Guide | Copies the page link and confirms with a toast. |
+| Get there | Everywhere | Opens Google Maps directions to the real address in a new tab. Place names open the place page or its Explore row. |
+| Link presets | Explore | `explore.html?craving=pizza&where=canal&with=date&tina=1` presets the sentence; `explore.html?guide=worth-the-drive` shows just that guide's places, with a "Show every place" reset. |
+| Concept forms | About, For restaurants | Required fields and email are checked inline, the place picker can be preset with `?place=<id>`, and a sent form confirms that nothing was sent. |
 | Sunday list | Home | Validates the email inline and confirms without sending anything. |
 
 ### The map
@@ -372,6 +379,7 @@ The map stays schematic (drive-time rings, painted neighborhood blocks, house-nu
 - **Pins keep their size.** Roads, labels and pins stay the same size on screen at every zoom, so zooming in spreads places apart instead of enlarging everything.
 - **Crowded streets cluster.** Pins that would touch merge into a numbered circle (from far out, most of Shrewsbury Street is one circle). Click one to zoom just far enough to separate it.
 - **Names appear when there's room.** From about 1.7× zoom, each pin gets a name tag placed where it won't cover another pin or tag.
+- **Every visible pin is clickable.** Faded pins (outside the current tab, or not matching Explore's sentence) still open their card; the selected place shows at full strength until the card closes.
 - **Previews.** Hover or focus a pin for its name, address and whether Tina has been. Hover a cluster to see what's inside it.
 - **Jump to a neighborhood.** Chips across the top (Canal District, Downtown, Shrewsbury Street, Park Ave, South Worcester, Shrewsbury, Leominster), or click a painted block or town plate. Dashed towns open a "not covered yet" card with a link to suggest a place.
 - **Get there.** A place's card links straight to Google Maps directions for its real address. "More" goes to its page or its Explore row.
@@ -541,7 +549,10 @@ Tina's videos (all seven, by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/
 ├── explore.html        Every place, filterable, with the map
 ├── tina.html           About Tina and her latest posts
 ├── place.html          Place page concept (American Flatbread Co)
-├── guide.html          Guide concept (New since 2025)
+├── guide.html          Guide template (?g=new | shrewsbury-st | worth-the-drive)
+├── guides.html         Every guide
+├── about.html          Editorial policy, how Tina picks, events, stories, contact
+├── owners.html         For restaurants: claim, fix, opening, invite, advertise, work with us
 ├── brand.html          Brand book page
 ├── css/
 │   ├── ltef.css        All tokens and component styles

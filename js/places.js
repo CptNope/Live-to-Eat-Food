@@ -195,3 +195,37 @@ LTEF.withs = [
   { id: "group", label: "a group" },
   { id: "family", label: "the family" }
 ];
+
+/* Guides: an ordered route of places. Text in `say` is the site's voice and sticks to sourced facts;
+   Tina's words only ever come from her posts (the place's tina.quote). */
+LTEF.guides = [
+  { id: "new", title: "New since 2025, and Tina's already been", short: "New since 2025", siding: "brick",
+    lede: "Three places that opened recently, in the order they opened: candlepin and flatbread in the Canal District, stir-fry off Route 9, and the Mongolian BBQ that got Tina to Leominster.",
+    meta: "3 openings, May 2025 to early 2026", note: { place: "hungry-bowl", text: "Thank goodness Hungry Bowl opened in Leominster." },
+    stops: [
+      { place: "american-flatbread", say: "Wood-fired flatbread upstairs and ten candlepin lanes downstairs, inside The Cove. It brought public candlepin back to Worcester for the first time since Colonial Bowling closed in 2020.", extra: "Opened May 10, 2025" },
+      { place: "honeygrow", say: "Made-to-order stir-fry and salads at Lakeway Commons, right off Route 9. Pick a protein and a base; the honeybars are the dessert.", extra: "Opened July 7, 2025" },
+      { sponsor: true },
+      { place: "hungry-bowl", say: "Her first Mongolian BBQ, and the reason this guide heads north up I-190.", extra: "Mongolian BBQ, about 30 minutes up I-190" }
+    ] },
+  { id: "shrewsbury-st", title: "Shrewsbury Street, the list Tina's working through", short: "Shrewsbury Street", siding: "mustard",
+    lede: "Restaurant Row, in street-number order, from Leo Turo Way out past the Boulevard Diner. Tina hasn't posted from any of these yet, so this guide sticks to the facts until she does.",
+    meta: "7 stops on one street",
+    stops: [
+      { place: "leos", say: "Italian, just off Shrewsbury Street at the Leo Turo Way corner." },
+      { place: "volturno", say: "Wood-fired Neapolitan pizza. Volturno shares number 72 with Wormtown Brewery's taproom." },
+      { place: "via", say: "Italian on Restaurant Row." },
+      { place: "nuovo", say: "Mediterranean, a few doors up at 92." },
+      { place: "chop-house", say: "The street's steakhouse." },
+      { place: "boulevard-diner", say: "A 1936 Worcester Lunch Car Company diner, car no. 730, still serving on Shrewsbury Street." },
+      { place: "flying-rhino", say: "Eclectic American, a bar and kitchen out at 278." }
+    ] },
+  { id: "worth-the-drive", title: "Worth the drive", short: "Worth the drive", siding: "green",
+    lede: "Three of Tina's finds outside the city: two along Route 9 in Shrewsbury and one up I-190 in Leominster.",
+    meta: "Route 9 east, then I-190 north", note: { place: "ground-round", text: "We found the most well rounded menu at Ground Round!" },
+    stops: [
+      { place: "honeygrow", say: "Stir-fry and salads at Lakeway Commons, right on Route 9 in Shrewsbury.", extra: "Route 9, Shrewsbury" },
+      { place: "ground-round", say: "A big American pub menu on Grafton St in Shrewsbury.", extra: "Grafton St, Shrewsbury" },
+      { place: "hungry-bowl", say: "Mongolian BBQ in Leominster, about 30 minutes north of Worcester on I-190.", extra: "About 30 minutes up I-190" }
+    ] }
+];

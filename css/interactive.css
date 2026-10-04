@@ -104,7 +104,8 @@ dialog::backdrop{background:rgba(30,31,28,.55)}
 .pin-tina text{fill:var(--trim);font-family:"Archivo",sans-serif;font-stretch:62%;font-weight:820;font-size:21px;text-anchor:middle;pointer-events:none}
 .pin-dot circle{stroke:var(--trim);stroke-width:2.5}
 .dot-mustard{fill:#B27D00}.dot-blue{fill:var(--blue)}.dot-green{fill:var(--green)}.dot-brick{fill:var(--brick)}.dot-bluelt{fill:#5C7D97}.dot-greenlt{fill:#6E7F57}
-.pin-off{opacity:.2;cursor:inherit;pointer-events:none}
+.pin-off{opacity:.3}
+.pin-off:hover{opacity:.75}
 .pin-hidden{display:none}
 .pin.hot rect,.pin:hover rect,.pin:focus-visible rect{stroke:var(--mustard);stroke-width:3.5}
 .pin.hot circle,.pin:hover circle,.pin:focus-visible circle{stroke:var(--asphalt);r:8.5}
@@ -294,3 +295,33 @@ dialog::backdrop{background:rgba(30,31,28,.55)}
 .post .ph.has-video + .note{margin-top:10px}
 .house .ph-credit{font-size:9.5px;right:4px;bottom:4px}
 .house .ph-stand{font-size:9.5px;left:4px;top:4px}
+
+/* ---------- guides, About, For restaurants ---------- */
+.g-dark .lede,.g-dark .meta{color:var(--mustard-ink)}
+.g-dark .note small a{color:inherit}
+.guide-lists{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin-top:clamp(36px,4vw,56px)}
+.gl h3{margin:0 0 4px}.gl h3 a{text-decoration:none}.gl h3 a:hover{text-decoration:underline}
+.gl .meta{margin:0 0 14px}
+.gl ol{list-style:none;margin:0;padding:0;border-top:3px solid var(--asphalt)}
+.gl li{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 0;border-bottom:2px solid var(--trim-2)}
+.gl li .plate .n{font-size:20px;padding:3px 6px 1px}
+.gl li a{font-weight:700;font-stretch:106%}
+.gl li .lbl{margin-left:auto}
+.form-sec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,4vw,72px);align-items:start}
+.cform{display:grid;gap:14px;background:var(--trim);color:var(--asphalt);border:3px solid var(--asphalt);padding:clamp(18px,2.4vw,28px)}
+.cf-row{display:grid;gap:6px;margin:0}
+.cf-row label{font-weight:760;font-stretch:106%;font-size:15px}
+.cf-opt{font-weight:500;color:var(--ink-2)}
+.cform input,.cform select,.cform textarea{font:inherit;font-size:16px;min-height:48px;padding:10px 12px;border:2px solid var(--asphalt);background:#fff;color:var(--asphalt);width:100%;box-sizing:border-box}
+.cform textarea{min-height:110px;resize:vertical}
+.cform [aria-invalid="true"]{border-color:var(--brick);box-shadow:0 0 0 3px rgba(156,47,34,.25)}
+.cf-err{margin:0;color:var(--brick);font-weight:700}
+.cf-actions{margin:4px 0 0}
+.form-sec .signed{margin-top:0;color:var(--asphalt)}
+.jumplinks{display:flex;flex-direction:column;border-top:3px solid currentColor;align-self:end}
+.jumplinks a{padding:12px 0;border-bottom:2px solid currentColor;text-decoration:none;font-weight:760;font-stretch:108%;font-size:17px}
+.jumplinks a:hover{text-decoration:underline}
+.rules{margin:14px 0 0;padding-left:20px;display:grid;gap:10px;font-family:var(--serif,inherit)}
+.guide-note{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#F7E3B0;border:2px solid var(--asphalt);padding:10px 14px;margin:0 0 14px}
+.guide-note[hidden]{display:none}
+@media (max-width:900px){.guide-lists,.form-sec{grid-template-columns:minmax(0,1fr)}}

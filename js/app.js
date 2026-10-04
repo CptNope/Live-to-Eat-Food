@@ -135,6 +135,10 @@
   hydratePhotos(document);
   hydrateVideos(document);
 
+  function getThere(p, cls) {
+    if (!p.num) return '<a class="' + cls + '" href="' + placeHref(p) + '">' + icon("i-turn") + "Get there</a>";
+    return '<a class="' + cls + '" href="' + directionsUrl(p) + '" target="_blank" rel="noopener">' + icon("i-turn") + 'Get there<span class="sr"> (opens Google Maps)</span></a>';
+  }
   function tinaLabel(p) {
     return p.tina ? '<span class="lbl tina">Tina ate here <em>' + esc(p.tina.date) + "</em></span>" : '<span class="lbl unclaimed">Tina hasn\'t been yet</span>';
   }
@@ -182,6 +186,10 @@
       tinaOnly: root.getAttribute("data-tina-only") !== "false"
     };
     var lists = { craving: D.cravings, where: D.wheres, with: D.withs };
+    if (root.hasAttribute("data-url-presets")) {
+      ["craving", "where", "with"].forEach(function (k) { var v = param(k); if (v && lists[k].some(function (o) { return o.id === v; })) st[k] = v; });
+      if (param("tina") === "1") st.tinaOnly = true;
+    }
     var openBox = null;
 
     function closeBox(focusSlot) {
@@ -280,6 +288,7 @@
       }
     });
     update();
+    st.refresh = update;
     return st;
   }
 
@@ -303,7 +312,7 @@
       '<div class="pick-row">' + plate(p, "lg") + '<div><h2 class="d-l" id="pick-h">' + esc(p.name) + '</h2><p class="pick-addr">' + esc(address(p)) + ", " + esc(a.name) + "</p></div></div>" +
       '<p class="note">' + esc(p.tina.quote) + '<small><a href="' + p.tina.url + '">Tina on ' + esc(p.tina.platform) + ", " + esc(p.tina.date) + "</a></small></p>" +
       (note ? '<p class="meta">' + esc(note) + "</p>" : "") +
-      '<div class="pick-actions"><a class="btn" href="' + placeHref(p) + '">' + icon("i-turn") + "Get there</a>" + saveBtn(p, "btn ghost") +
+      '<div class="pick-actions">' + getThere(p, "btn") + saveBtn(p, "btn ghost") + '<a class="btn ghost" href="' + placeHref(p) + '">' + (p.page ? "Full page" : "More") + "</a>" +
       '<button class="btn ghost" type="button" data-pick-again>Pick again</button><button class="linkish" type="button" data-pick-close>Close</button></div></div>';
     if (!pickDlg.open) { if (pickDlg.showModal) pickDlg.showModal(); else pickDlg.setAttribute("open", ""); }
     $("[data-pick-again]", pickDlg).addEventListener("click", function () { tinaPick(st); });
@@ -325,7 +334,7 @@
       '<div class="fl top">' + top + "</div>" +
       '<div class="fl mid"><div class="window"><div class="ph ' + p.tone + ' ratio-43' + (placePhotoHtml(p) ? " has-photo" : "") + '">' + placePhotoHtml(p) + '<p class="cap"><b>' + esc(p.dish) + "</b></p></div></div></div>" +
       '<div class="fl door"><div><h3 class="nm"><a href="' + placeHref(p) + '">' + esc(p.name) + '</a></h3><p class="meta">' + esc(p.cuisine) + (p.price ? ", " + esc(p.price) : "") + "</p>" +
-      '<div class="door-acts"><a class="door-go" href="' + placeHref(p) + '">' + icon("i-turn") + "Get there</a>" + saveBtn(p, "mini") + "</div></div>" +
+      '<div class="door-acts">' + getThere(p, "door-go") + saveBtn(p, "mini") + "</div></div>" +
       '<span class="n">' + (p.num ? esc(p.num) : "") + "</span></div></article>" +
       '<p class="curbname">' + (p.street ? esc(p.street) + ", " : "") + esc(a.name) + "</p></div>";
   }
@@ -487,7 +496,9 @@
     });
 
     function inMode(p) { return mode === "all" ? true : mode === "saved" ? isSaved(p.id) : !!p.tina; }
-    function isOn(p) { return inMode(p) && (!filter || filter[p.id]); }
+    function inView(p) { return inMode(p) && (!filter || filter[p.id]); }
+    /* the selected place always shows at full strength, even if it's outside the current tab or filter */
+    function isOn(p) { return p.id === selected || inView(p); }
     function active() {
       return mapped.filter(isOn).sort(function (a, b) {
         return (b.id === selected) - (a.id === selected) || (b.tina ? 1 : 0) - (a.tina ? 1 : 0) || a.y - b.y || a.x - b.x;
@@ -900,7 +911,8 @@
         tip.innerHTML = "<b>" + g.ids.length + " places in " + esc(clusterName(g)) + "</b><span>" + esc(names.slice(0, 4).join(", ") + (names.length > 4 ? " and " + (names.length - 4) + " more" : "")) + '</span><span class="tip-act">Click to zoom in</span>';
       } else {
         var p = byId[el.getAttribute("data-id")];
-        tip.innerHTML = "<b>" + esc(p.name) + "</b><span>" + esc(address(p) + ", " + area(p).name) + '</span><span class="tip-act' + (p.tina ? " t" : "") + '">' + (p.tina ? "Tina ate here, " + esc(p.tina.date) : "Tina hasn't been yet") + "</span>";
+        tip.innerHTML = "<b>" + esc(p.name) + "</b><span>" + esc(address(p) + ", " + area(p).name) + '</span><span class="tip-act' + (p.tina ? " t" : "") + '">' + (p.tina ? "Tina ate here, " + esc(p.tina.date) : "Tina hasn't been yet") + "</span>" +
+          (isOn(p) ? "" : '<span class="tip-act">' + (filter && !filter[p.id] ? "Doesn't match your sentence." : "Not in this tab.") + " Click to see it anyway.</span>");
       }
       tip.hidden = false;
       placeTip();
@@ -996,7 +1008,7 @@
     });
     svg.addEventListener("pointerover", function (e) {
       if (e.pointerType === "touch" || drag && drag.moved) return;
-      var el = e.target.closest(".pin:not(.pin-off), .cluster");
+      var el = e.target.closest(".pin, .cluster");
       if (el) showTip(el);
     });
     svg.addEventListener("pointerout", function (e) {
@@ -1023,7 +1035,7 @@
         mode = t.getAttribute("data-mode");
         $$(".tabs button", root).forEach(function (b) { b.setAttribute("aria-pressed", b === t); });
         if (mode !== "saved") routeOn = false;
-        if (selected && !isOn(byId[selected])) { selected = null; showCard(null); setParam(null); }
+        if (selected && !inView(byId[selected])) { selected = null; showCard(null); setParam(null); }
         update();
         if (mode === "saved") { var sp = mapped.filter(isOn); if (sp.length) { setJump(null); animateTo(viewForBox(boxOf(sp), 3)); } }
         var n = mapped.filter(isOn).length;
@@ -1045,7 +1057,7 @@
       var j = e.target.closest("[data-jump]");
       if (j) { jumpTo(j.getAttribute("data-jump")); return; }
       if (e.target.closest("[data-mc-close]")) { clearSelection(); return; }
-      var pin = e.target.closest(".pin:not(.pin-off)");
+      var pin = e.target.closest(".pin");
       if (pin) { hideTip(); select(pin.getAttribute("data-id")); return; }
       var cl = e.target.closest(".cluster");
       if (cl) { hideTip(); openCluster(cl, e.detail === 0); return; }
@@ -1130,7 +1142,7 @@
       setFilter: function (ids, fit) {
         filter = null;
         if (ids) { filter = {}; ids.forEach(function (id) { filter[id] = true; }); }
-        if (selected && !isOn(byId[selected])) { selected = null; showCard(null); setParam(null); }
+        if (selected && !inView(byId[selected])) { selected = null; showCard(null); setParam(null); }
         update();
         if (fit) {
           var ps = mapped.filter(isOn);
@@ -1202,6 +1214,59 @@
     renderVideo(D.videos[0]);
   }
 
+  /* ---------- guides (guide.html?g=<id>) ---------- */
+  function param(k) { try { return new URL(location.href).searchParams.get(k); } catch (e) { return null; } }
+  function guideById(id) { return (D.guides || []).filter(function (g) { return g.id === id; })[0]; }
+  var routeEl = $("ol.route[data-guide]");
+  if (routeEl && D.guides) {
+    var G = guideById(param("g")) || guideById(routeEl.getAttribute("data-guide")) || D.guides[0];
+    var head = $("header.field"), dark = G.siding === "mustard";
+    head.className = "field f-" + G.siding + " clap" + (dark ? " g-dark" : "");
+    var logo = $(".logo", head);
+    if (logo) logo.classList.toggle("light", !dark);
+    $$(".top-r .iconbtn", head).forEach(function (b) { b.style.borderColor = b.style.color = dark ? "var(--asphalt)" : "var(--trim)"; });
+    document.title = G.title + " — Live to Eat Food";
+    var soft = dark ? "var(--mustard-ink)" : "#F3E1DA", notePlace = G.note && byId[G.note.place];
+    $(".g-hero", head).innerHTML = '<div><h1 class="d-xl">' + esc(G.title) + '</h1><p class="lede" style="margin-top:24px;color:' + soft + '">' + esc(G.lede) + "</p></div>" +
+      '<div style="display:grid;gap:14px;justify-items:start">' +
+      (notePlace ? '<p class="note" style="font-size:24px">' + esc(G.note.text) + '<small><a href="' + notePlace.tina.url + '">Tina on ' + esc(notePlace.tina.platform) + ", " + esc(notePlace.tina.date) + "</a></small></p>" : "") +
+      '<p class="meta" style="color:' + soft + ';margin:0">' + esc(G.meta) + "</p>" +
+      '<p class="progress" data-progress></p>' +
+      '<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn ' + (dark ? "" : "light") + '" href="explore.html?guide=' + G.id + '#map">' + icon("i-map") + 'See them on the map</a><button class="btn ghost" type="button" data-share>Send to a friend</button></div></div>';
+    var stops = G.stops.filter(function (st) { return st.sponsor || byId[st.place]; });
+    routeEl.innerHTML = stops.map(function (st, i) {
+      var last = i === stops.length - 1 ? ' style="padding-bottom:0"' : "";
+      if (st.sponsor) {
+        return '<li class="stop sponsor"><div class="pin"><span class="plate light" style="border:2px solid var(--asphalt)"><span class="n">$</span></span></div>' +
+          '<div class="window" style="background:var(--trim)"><div class="ph t-room ratio-43"><span class="tag">Sponsor photo</span><p class="cap"><b>Advertiser\'s image</b>Supplied by the sponsor, labeled as theirs.</p></div></div>' +
+          '<div class="info"><span class="lbl sponsored">Sponsored</span><h2 class="d-m" style="margin-top:14px">[Sponsor name]</h2><p class="body" style="margin:10px 0 0">A paid placement between stops. It is not on Tina\'s route and never gets her handwriting.</p>' +
+          '<p style="margin:16px 0 0"><a class="btn ghost sm" href="owners.html#advertise">How sponsored stops work</a></p></div></li>';
+      }
+      var p = byId[st.place], a = area(p), key = (D.placePhoto || {})[p.id];
+      var quote = p.tina && !p.tina.noQuote ? '<p class="hand" style="font-size:24px;margin:0 0 12px">' + esc(p.tina.quote) + "</p>" : "";
+      var links = [];
+      if (p.tina) links.push('<a href="' + p.tina.url + '">' + (p.tina.platform === "TikTok" ? "Tina\'s video" : "Tina on " + esc(p.tina.platform)) + "</a>");
+      if (p.num) links.push('<a href="' + directionsUrl(p) + '" target="_blank" rel="noopener">Directions</a>');
+      links.push('<a href="' + placeHref(p) + '">' + (p.page ? "Full place page" : "On Explore") + "</a>");
+      return '<li class="stop"' + last + ' id="stop-' + p.id + '"><div class="pin"><span class="plate"><span class="n">' + esc(p.num || "—") + "</span></span></div>" +
+        '<div class="window" style="background:var(--trim-2)"><div class="ph ' + p.tone + ' ratio-32"' + (key ? ' data-photo="' + key + '" data-place="' + p.id + '"' : "") + '><p class="cap"><b>' + esc(p.dish) + "</b></p></div></div>" +
+        '<div class="info"><h2 class="d-m"><a href="' + placeHref(p) + '" style="text-decoration:none">' + esc(p.name) + "</a></h2>" +
+        '<p class="meta" style="margin:0">' + esc(address(p) + ", " + a.name) + (st.extra ? ". " + esc(st.extra) : "") + "</p>" +
+        '<div class="labels">' + tinaLabel(p) + "</div>" + quote +
+        '<p class="body" style="margin:0">' + esc(st.say) + "</p>" +
+        '<p class="meta" style="margin:12px 0 0">' + links.join(" &middot; ") + "</p>" +
+        '<p style="margin:16px 0 0;display:flex;gap:8px;flex-wrap:wrap"><button class="tried" type="button" data-tried="' + p.id + '" aria-pressed="false"><span class="box" aria-hidden="true"></span><span class="tried-label">I\'ve been here</span></button>' + saveBtn(p) + "</p></div></li>";
+    }).join("");
+    hydratePhotos(routeEl);
+    var nextSec = $("[data-next-guide]");
+    if (nextSec) {
+      var gi = D.guides.indexOf(G), N = D.guides[(gi + 1) % D.guides.length];
+      nextSec.innerHTML = '<div><h2 class="d-m">Next guide: ' + esc(N.short) + '</h2><p class="meta" style="margin:8px 0 0">' + esc(N.meta) + '</p></div>' +
+        '<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="guide.html?g=' + N.id + '">Open the guide</a><a class="btn ghost" href="guides.html">Every guide</a></div>';
+    }
+    syncSaves();
+  }
+
   /* ---------- guide progress ---------- */
   var tried = store.get("ltef-tried", []);
   function syncTried() {
@@ -1248,11 +1313,27 @@
       res.innerHTML = l.length ? l.map(row).join("") : '<div class="empty"><p class="d-s">Nothing on this street yet.</p><p class="body">Try a different craving, or switch on places Tina hasn\'t been to.</p></div>';
       syncSaves();
     }
-    var exMap = mapApi[0], firstDraw = true;
-    initCrave($("[data-crave='explore']"), function (st, list) {
+    var exMap = mapApi[0], firstDraw = true, onlyGuide = guideById(param("guide"));
+    var guideNote = $("[data-guide-note]", exp);
+    function guideIds(g) { return g.stops.filter(function (st) { return st.place; }).map(function (st) { return st.place; }); }
+    function showGuideNote() {
+      if (!guideNote) return;
+      guideNote.hidden = !onlyGuide;
+      if (onlyGuide) guideNote.innerHTML = '<span>Showing the ' + guideIds(onlyGuide).length + ' places in <a href="guide.html?g=' + onlyGuide.id + '">' + esc(onlyGuide.title) + '</a>.</span><button class="linkish" type="button" data-clear-guide>Show every place</button>';
+    }
+    showGuideNote();
+    var craveApi = null;
+    exp.addEventListener("click", function (e) {
+      if (!e.target.closest("[data-clear-guide]")) return;
+      onlyGuide = null; showGuideNote();
+      try { var u = new URL(location.href); u.searchParams.delete("guide"); history.replaceState(null, "", u.pathname + u.search + u.hash); } catch (x) {}
+      if (craveApi) craveApi.refresh();
+    });
+    craveApi = initCrave($("[data-crave='explore']"), function (st, list) {
+      if (onlyGuide) { var ids = guideIds(onlyGuide); list = list.filter(function (p) { return ids.indexOf(p.id) > -1; }); }
       lastList = list;
       draw();
-      if (exMap) exMap.setFilter(list.map(function (p) { return p.id; }), !firstDraw);
+      if (exMap) exMap.setFilter(list.map(function (p) { return p.id; }), !firstDraw || !!onlyGuide);
       firstDraw = false;
     });
     sortSel.addEventListener("change", draw);
@@ -1310,9 +1391,52 @@
           : '<a class="ph ' + p.tone + ' ratio-916" href="' + p.tina.url + '"><span class="tag">' + esc(p.tina.platform) + ", " + esc(p.tina.date) + '</span><span class="post-play" aria-hidden="true"><svg><use href="#i-play"></use></svg></span><span class="sr">Watch Tina\'s ' + esc(p.name) + " video</span></a>") +
         '<p class="note flat">' + esc(p.tina.quote) + "</p>" +
         '<p class="post-place"><b>' + esc(p.name) + '</b><span class="meta">' + esc(address(p)) + ", " + esc(area(p).name) + "</span></p>" +
-        '<div class="post-acts">' + (p.num ? '<a class="door-go" href="' + placeHref(p) + '">' + icon("i-turn") + "Get there</a>" : "") + saveBtn(p, "mini") + "</div></article>";
+        '<div class="post-acts">' + (p.num ? getThere(p, "door-go") : "") + saveBtn(p, "mini") + "</div></article>";
     }).join("") +
-      '<article class="post post-next f-mustard clap"><p class="d-s">Where should she go next?</p><p class="body">Tina reads every suggestion. Tell her about the place you keep telling everyone about.</p><a class="btn sm" href="index.html#street-sec">Suggest a place</a></article>';
+      '<article class="post post-next f-mustard clap"><p class="d-s">Where should she go next?</p><p class="body">Tell her about the place you keep telling everyone about.</p><a class="btn sm" href="index.html#street-sec">Suggest a place</a></article>';
+  }
+
+  /* ---------- concept forms (About, For restaurants) ---------- */
+  $$("select[data-place-select]").forEach(function (sel) {
+    var want = param("place");
+    sortPlaces(D.places, "az").forEach(function (p) {
+      var o = document.createElement("option");
+      o.value = p.id; o.textContent = p.name + ", " + address(p);
+      if (p.id === want) o.selected = true;
+      sel.appendChild(o);
+    });
+  });
+  document.addEventListener("submit", function (e) {
+    var f = e.target.closest("form[data-concept]");
+    if (!f) return;
+    e.preventDefault();
+    var err = $(".cf-err", f), bad = null;
+    $$("[required]", f).forEach(function (el) { el.removeAttribute("aria-invalid"); if (!bad && !String(el.value).trim()) bad = el; });
+    var em = $('input[type="email"]', f);
+    if (!bad && em && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())) bad = em;
+    if (bad) {
+      var lbl = $('label[for="' + bad.id + '"]', f);
+      err.textContent = (bad === em ? "That email is missing something. Try name@example.com." : (lbl ? lbl.firstChild.textContent.trim() : "This field") + " is needed.");
+      err.hidden = false;
+      bad.setAttribute("aria-invalid", "true");
+      bad.focus();
+      return;
+    }
+    var done = document.createElement("div");
+    done.className = "signed";
+    done.setAttribute("role", "status");
+    done.innerHTML = "<p><b>" + esc(f.getAttribute("data-thanks") || "Thanks.") + "</b></p><p class=\"meta\" style=\"margin:0\">Concept: nothing was sent.</p>";
+    f.replaceWith(done);
+  });
+  if (location.hash) { var tgt = document.getElementById(location.hash.slice(1)); if (tgt && tgt.tagName === "SECTION") setTimeout(function () { tgt.scrollIntoView(); }, 30); }
+
+  /* ---------- guides index ---------- */
+  var gl = $("[data-guide-lists]");
+  if (gl && D.guides) {
+    gl.innerHTML = D.guides.map(function (g) {
+      return '<div class="gl"><h3 class="d-s"><a href="guide.html?g=' + g.id + '">' + esc(g.title) + '</a></h3><p class="meta">' + esc(g.meta) + "</p><ol>" +
+        g.stops.filter(function (st) { return st.place && byId[st.place]; }).map(function (st) { var p = byId[st.place]; return "<li>" + plate(p) + '<a href="' + placeHref(p) + '">' + esc(p.name) + "</a> " + tinaLabel(p) + "</li>"; }).join("") + "</ol></div>";
+    }).join("");
   }
 
   syncSaves();
