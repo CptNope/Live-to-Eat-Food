@@ -571,7 +571,7 @@ Tina's videos (all seven, by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/
 
 **Run locally:** open `index.html` in a browser, or serve the folder (`python3 -m http.server`) and visit `http://localhost:8000`. No build step and no dependencies. The street, map pins, Explore rows and Tina's feed are drawn by `js/app.js` from `js/places.js`, so JavaScript needs to be on. To add a place, add an entry to `js/places.js`. Fonts load from Google Fonts.
 
-**GitHub Pages:** Settings → Pages → Deploy from a branch → `main` / `(root)`.
+**GitHub Pages:** Settings → Pages → Deploy from a branch → `main` / `(root)`. Script and style links carry a `?v=` version tag; bump it in every page when `js/` or `css/` changes so browsers don't mix a new page with cached old code (Pages caches files for 10 minutes).
 
 ---
 
