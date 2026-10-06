@@ -123,6 +123,22 @@
     if (!id) return "";
     return '<iframe class="tt-frame" src="https://www.tiktok.com/player/v1/' + id + '?music_info=0&amp;description=0&amp;rel=0&amp;native_context_menu=0&amp;closed_caption=1" title="' + esc(title || "Tina's TikTok video") + '" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
   }
+  /* cover frame for one of Tina's TikToks (oEmbed thumbnail), cached for the browser session */
+  function ttCover(url, cb) {
+    var key = "ltef-cover-" + tiktokId(url), hit = null;
+    try { hit = JSON.parse(sessionStorage.getItem(key) || "null"); } catch (e) {}
+    if (hit && hit.exp > Date.now() / 1000 + 600) return cb(hit.src);
+    if (!window.fetch) return;
+    fetch("https://www.tiktok.com/oembed?url=" + encodeURIComponent(url))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.thumbnail_url) return;
+        var m = /x-expires=(\d+)/.exec(j.thumbnail_url);
+        try { sessionStorage.setItem(key, JSON.stringify({ src: j.thumbnail_url, exp: m ? +m[1] : Date.now() / 1000 + 3600 })); } catch (e) {}
+        cb(j.thumbnail_url);
+      })
+      .catch(function () {});
+  }
   function hydrateVideos(root) {
     $$("[data-tiktok]", root).forEach(function (el) {
       if (el.classList.contains("has-video")) return;
@@ -1261,6 +1277,22 @@
       });
     });
     renderVideo(D.videos[0]);
+    /* each switch tile shows the video's real cover frame, from TikTok's oEmbed API.
+       Cover URLs are signed and expire after a few days, so they're fetched fresh on load;
+       if TikTok can't be reached the tile keeps its colored fallback and label. */
+    thumbs.forEach(function (t) {
+      var v = D.videos.filter(function (x) { return x.id === t.getAttribute("data-video"); })[0];
+      if (v) ttCover(v.url, function (src) {
+        var img = new Image();
+        img.className = "tt-cover";
+        img.alt = "";
+        img.referrerPolicy = "no-referrer";
+        img.decoding = "async";
+        img.onload = function () { t.classList.add("has-cover"); };
+        img.src = src;
+        t.insertBefore(img, t.firstChild);
+      });
+    });
   }
 
   /* ---------- guides (guide.html?g=<id>) ---------- */

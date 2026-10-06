@@ -11,6 +11,7 @@
 <style>
 body{margin:0;background:#F6F6F1;font-family:"Archivo",system-ui,sans-serif}
 a{color:inherit}a:hover{color:inherit}
+img[data-tt]:not([src]){visibility:hidden}.ph.has-cover{background:#262723}.ph.has-cover::after{display:none}.ph.has-cover::before{background:linear-gradient(to bottom,rgba(14,14,12,.35),transparent 30%,transparent 60%,rgba(14,14,12,.55))}
 .f-asphalt + .foot{border-top:2px solid rgba(246,246,241,.18)}
 @media (max-width:760px){.latest{margin-bottom:0}.p-hero .window{margin-bottom:0 !important}}
 </style>
@@ -150,17 +151,17 @@ a{color:inherit}a:hover{color:inherit}
     <div>
       <div class="reel">
         <div class="ph t-night ratio-916">
+          <img data-tt="7536269559175662861" alt="Cover of Tina's Chashu Ramen + Izakaya TikTok: a bowl of seafood boil ramen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2">
           <span class="tag">Tina's TikTok, Aug 2025</span>
-          <p class="cap"><b>Video: Chashu Ramen + Izakaya</b>Her seafood boil ramen visit. Plays in TikTok's own player on the site.</p>
         </div>
         <a class="play" href="https://www.tiktok.com/@livetoeatfoodie/video/7536269559175662861" aria-label="Play Tina's Chashu video on TikTok"><svg><use href="#i-play"></use></svg></a>
       </div>
       <div class="scrub" aria-hidden="true"><i></i><b style="left:38%"></b></div>
       <div class="reel-row" aria-label="More videos">
-        <a class="ph t-saffron ratio-916" href="https://www.tiktok.com/@livetoeatfoodie/video/7535892018044751159"><span class="sr">Tina's Bocado TikTok</span></a>
-        <a class="ph t-pie ratio-916" href="https://www.tiktok.com/@livetoeatfoodie/video/7669833089807355150"><span class="sr">Tina's Volturno TikTok</span></a>
-        <a class="ph t-tuna ratio-916" href="https://www.tiktok.com/@livetoeatfoodie/video/7652094866901552398"><span class="sr">Tina's Baba Sushi TikTok</span></a>
-        <a class="ph t-broth ratio-916" href="https://www.tiktok.com/@livetoeatfoodie/video/7614645904292810015"><span class="sr">Tina's Pho Dakao TikTok</span></a>
+        <a class="ph t-saffron ratio-916" href="https://www.tiktok.com/@livetoeatfoodie/video/7535892018044751159"><img data-tt="7535892018044751159" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2"><span class="sr">Tina's Bocado TikTok</span></a>
+        <a class="ph t-pie ratio-916" href="https://www.tiktok.com/@livetoeatfoodie/video/7669833089807355150"><img data-tt="7669833089807355150" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2"><span class="sr">Tina's Volturno TikTok</span></a>
+        <a class="ph t-tuna ratio-916" href="https://www.tiktok.com/@livetoeatfoodie/video/7652094866901552398"><img data-tt="7652094866901552398" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2"><span class="sr">Tina's Baba Sushi TikTok</span></a>
+        <a class="ph t-broth ratio-916" href="https://www.tiktok.com/@livetoeatfoodie/video/7614645904292810015"><img data-tt="7614645904292810015" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2"><span class="sr">Tina's Pho Dakao TikTok</span></a>
       </div>
     </div>
     <div>
@@ -391,5 +392,14 @@ a{color:inherit}a:hover{color:inherit}
   <a href="https://cptnope.github.io/Live-to-Eat-Food/tina.html"><svg class="ico"><use href="#i-tina"></use></svg>Tina</a>
 </nav>
 </div>
+<script>
+/* Tina's real cover frames, fetched from TikTok's oEmbed API on load (cover URLs expire, so nothing is stored here). */
+document.querySelectorAll("img[data-tt]").forEach(function (img) {
+  fetch("https://www.tiktok.com/oembed?url=" + encodeURIComponent("https://www.tiktok.com/@livetoeatfoodie/video/" + img.getAttribute("data-tt")))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { if (j && j.thumbnail_url) { img.referrerPolicy = "no-referrer"; img.src = j.thumbnail_url; img.parentNode.classList.add("has-cover"); } })
+    .catch(function () {});
+});
+</script>
 </body>
 </html>
