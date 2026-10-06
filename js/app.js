@@ -487,6 +487,9 @@
     var pinEl = {};
     mapped.slice().sort(function (a, b) { return (a.tina ? 1 : 0) - (b.tina ? 1 : 0); }).forEach(function (p) {
       var s = pinSize(p), g = svgEl("g", { "class": "pin " + (p.tina ? "pin-tina" : "pin-dot"), "data-id": p.id });
+      /* an invisible, finger-sized hit area so a near miss still lands on the pin, not the block under it */
+      var hw = Math.max(s.w + 12, 34), hh = Math.max(s.h + 12, 34);
+      g.appendChild(svgEl("rect", { "class": "hit", x: -hw / 2, y: -hh / 2, width: hw, height: hh, rx: p.tina ? 4 : hh / 2, style: "fill:transparent;stroke:none" }));
       if (p.tina) {
         g.appendChild(svgEl("rect", { x: -s.w / 2, y: -13, width: s.w, height: 26, rx: 2 }));
         g.appendChild(svgEl("text", { x: 0, y: 8 }, p.num));
@@ -1061,13 +1064,38 @@
       if (pin) { hideTip(); select(pin.getAttribute("data-id")); return; }
       var cl = e.target.closest(".cluster");
       if (cl) { hideTip(); openCluster(cl, e.detail === 0); return; }
+      /* a click on the map near a pin or cluster opens that, rather than the block underneath */
+      if (svg.contains(e.target) && e.clientX) {
+        var near = nearestItem(e.clientX, e.clientY, 26);
+        if (near) {
+          hideTip();
+          if (near.classList.contains("cluster")) openCluster(near, false); else select(near.getAttribute("data-id"));
+          return;
+        }
+      }
       var dist = e.target.closest(".district");
-      if (dist) { jumpTo(dist.getAttribute("data-area")); return; }
+      if (dist) {
+        var ak = dist.getAttribute("data-area");
+        if (jumped === ak) { say("Already showing " + D.areas[ak].name + ". Pick a pin to open a place."); return; }
+        jumpTo(ak);
+        return;
+      }
       var town = e.target.closest(".town-off");
       if (town) { townCard(town.getAttribute("data-town")); return; }
       var it = e.target.closest(".ml-item");
       if (it) select(it.getAttribute("data-id"), { fromList: true, zoom: kOf(v) < 1.8 });
     });
+
+    function nearestItem(cx, cy, maxPx) {
+      var best = null, bd = maxPx;
+      $$(".pin:not(.pin-hidden), .cluster", svg).forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (!r.width) return;
+        var d = Math.hypot(r.left + r.width / 2 - cx, r.top + r.height / 2 - cy);
+        if (d < bd) { bd = d; best = el; }
+      });
+      return best;
+    }
 
     /* -- keyboard -- */
     root.addEventListener("keydown", function (e) {

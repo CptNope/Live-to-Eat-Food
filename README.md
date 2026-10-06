@@ -380,6 +380,7 @@ The map stays schematic (drive-time rings, painted neighborhood blocks, house-nu
 - **Crowded streets cluster.** Pins that would touch merge into a numbered circle (from far out, most of Shrewsbury Street is one circle). Click one to zoom just far enough to separate it.
 - **Names appear when there's room.** From about 1.7× zoom, each pin gets a name tag placed where it won't cover another pin or tag.
 - **Every visible pin is clickable.** Faded pins (outside the current tab, or not matching Explore's sentence) still open their card; the selected place shows at full strength until the card closes.
+- **Easy to hit.** Every pin has a finger-sized invisible target (at least 34px), and a click or tap that lands near a pin or cluster opens it instead of zooming to the neighborhood block underneath.
 - **Previews.** Hover or focus a pin for its name, address and whether Tina has been. Hover a cluster to see what's inside it.
 - **Jump to a neighborhood.** Chips across the top (Canal District, Downtown, Shrewsbury Street, Park Ave, South Worcester, Shrewsbury, Leominster), or click a painted block or town plate. Dashed towns open a "not covered yet" card with a link to suggest a place.
 - **Get there.** A place's card links straight to Google Maps directions for its real address. "More" goes to its page or its Explore row.
