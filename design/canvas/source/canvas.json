@@ -3,7 +3,7 @@
   "attachments": {},
   "boards": {
     "Guide-mobile.dc.html": {
-      "h": 4384,
+      "h": 4908,
       "title": "Shrewsbury Street guide, phone",
       "w": 390,
       "x": 5500,
@@ -12,7 +12,7 @@
     },
     "Guide.dc.html": {
       "expand": "fill",
-      "h": 3047,
+      "h": 3527,
       "title": "Shrewsbury Street guide, desktop",
       "w": 1440,
       "x": 3980,
@@ -37,7 +37,7 @@
       "is_interactive": true
     },
     "Place-mobile.dc.html": {
-      "h": 5189,
+      "h": 5759,
       "title": "Place page, phone",
       "w": 390,
       "x": 3510,
@@ -46,7 +46,7 @@
     },
     "Place.dc.html": {
       "expand": "fill",
-      "h": 3273,
+      "h": 3459,
       "title": "Place page, desktop",
       "w": 1440,
       "x": 1990,
