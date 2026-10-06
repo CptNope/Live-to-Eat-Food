@@ -139,6 +139,14 @@
     if (!p.num) return '<a class="' + cls + '" href="' + placeHref(p) + '">' + icon("i-turn") + "Get there</a>";
     return '<a class="' + cls + '" href="' + directionsUrl(p) + '" target="_blank" rel="noopener">' + icon("i-turn") + 'Get there<span class="sr"> (opens Google Maps)</span></a>';
   }
+  /* how often she's posted, and the December 2025 gift card giveaways, said plainly */
+  function tinaExtra(p) {
+    if (!p.tina) return "";
+    var bits = [];
+    if (p.tina.posts > 1) bits.push(p.tina.posts + " TikToks");
+    if (p.tina.giveaway) bits.push("in her " + p.tina.giveaway + " gift card giveaways");
+    return bits.length ? '<span class="tina-extra">' + esc(bits.join(", ")) + "</span>" : "";
+  }
   function tinaLabel(p) {
     return p.tina ? '<span class="lbl tina">Tina ate here <em>' + esc(p.tina.date) + "</em></span>" : '<span class="lbl unclaimed">Tina hasn\'t been yet</span>';
   }
@@ -533,22 +541,34 @@
 
     /* -- clustering: merge pins whose plates would touch on screen at this zoom -- */
     function clusterFor(vv) {
+      /* group around each cluster's centre (not by chaining touching pins), preferring the same neighbourhood,
+         so the city breaks into a handful of neighbourhood circles instead of one blob */
       var u = vv.w / cw(), atMax = kOf(vv) >= MAX_K - .01, out = [];
+      function px(p) { return { x: (p.x - vv.x) / u, y: (p.y - vv.y) / u }; }
+      function radius(g) { return g.ids.length > 1 ? 15 + Math.min(g.ids.length, 10) * .7 : Math.max(pinSize(byId[g.ids[0]]).w, 16) / 2; }
       active().forEach(function (p) {
-        var b = pinBox(p, u, 3);
+        var q = px(p), best = null, bd = Infinity;
         if (!atMax && p.id !== selected) {
-          for (var i = 0; i < out.length; i++) {
-            if (out[i].ids[0] !== selected && overlaps(out[i].box, b)) { out[i].ids.push(p.id); out[i].box = union(out[i].box, b); return; }
-          }
+          out.forEach(function (g) {
+            if (g.ids[0] === selected) return;
+            var d = Math.hypot(g.sx / g.ids.length - q.x, g.sy / g.ids.length - q.y);
+            var lim = g.area === p.area ? 40 : 26;
+            if (d < lim && d < bd) { bd = d; best = g; }
+          });
         }
-        out.push({ ids: [p.id], box: b });
+        if (best) { best.ids.push(p.id); best.sx += q.x; best.sy += q.y; }
+        else out.push({ ids: [p.id], sx: q.x, sy: q.y, area: p.area });
       });
-      for (var pass = 0, merged = true; merged && pass < 4; pass++) {
+      for (var pass = 0, merged = true; merged && pass < 6 && !atMax; pass++) {
         merged = false;
         for (var i = 0; i < out.length; i++) for (var j = i + 1; j < out.length; j++) {
-          if (out[i].ids.indexOf(selected) > -1 || out[j].ids.indexOf(selected) > -1 || atMax) continue;
-          if ((out[i].ids.length > 1 || out[j].ids.length > 1) && overlaps(out[i].box, out[j].box)) {
-            out[i].ids = out[i].ids.concat(out[j].ids); out[i].box = union(out[i].box, out[j].box); out.splice(j, 1); merged = true; j--;
+          var A = out[i], B = out[j];
+          if (A.ids.indexOf(selected) > -1 || B.ids.indexOf(selected) > -1) continue;
+          var d = Math.hypot(A.sx / A.ids.length - B.sx / B.ids.length, A.sy / A.ids.length - B.sy / B.ids.length);
+          if (d < radius(A) + radius(B) + 2) {
+            A.ids = A.ids.concat(B.ids); A.sx += B.sx; A.sy += B.sy;
+            if (A.area !== B.area) A.area = null;
+            out.splice(j, 1); merged = true; j--;
           }
         }
       }
@@ -558,6 +578,7 @@
         g.x = sx / g.ids.length; g.y = sy / g.ids.length;
         g.key = g.ids.length > 1 ? "c:" + g.ids.slice().sort().join(",") : "p:" + g.ids[0];
         g.r = 15 + Math.min(g.ids.length, 10) * .7;
+        g.box = g.ids.length > 1 ? { x1: g.x - g.r * u, y1: g.y - g.r * u, x2: g.x + g.r * u, y2: g.y + g.r * u } : pinBox(byId[g.ids[0]], u, 3);
       });
       return out;
     }
@@ -782,7 +803,7 @@
       card.hidden = false;
       card.innerHTML = '<button class="mc-x" type="button" aria-label="Close" data-mc-close>&times;</button>' +
         '<div class="mc-top">' + plate(p) + '<div><h3 class="d-s">' + esc(p.name) + '</h3><p class="meta">' + esc(address(p)) + ", " + esc(a.name) + "</p></div></div>" +
-        (p.tina && !p.tina.noQuote ? '<p class="hand mc-q">' + esc(p.tina.quote) + '</p><p class="meta"><a href="' + p.tina.url + '">Tina on ' + esc(p.tina.platform) + ", " + esc(p.tina.date) + "</a></p>" :
+        (p.tina && !p.tina.noQuote ? '<p class="hand mc-q">' + esc(p.tina.quote) + '</p><p class="meta"><a href="' + p.tina.url + '">Tina on ' + esc(p.tina.platform) + ", " + esc(p.tina.date) + "</a>" + (tinaExtra(p) ? " &middot; " + tinaExtra(p) : "") + "</p>" :
           p.tina ? '<p class="meta"><a href="' + p.tina.url + '">Featured on Tina\'s Instagram</a></p>' : '<p class="mc-fact"><span class="lbl unclaimed">Tina hasn\'t been yet</span></p>') +
         (p.facts && p.facts.length ? '<p class="mc-fact body">' + esc(p.facts[0]) + "</p>" : "") +
         '<div class="mc-acts">' + (p.num ? '<a class="btn sm" href="' + directionsUrl(p) + '" target="_blank" rel="noopener">' + icon("i-turn") + 'Get there<span class="sr"> (opens Google Maps)</span></a>' : "") +
@@ -1274,6 +1295,7 @@
       var quote = p.tina && !p.tina.noQuote ? '<p class="hand" style="font-size:24px;margin:0 0 12px">' + esc(p.tina.quote) + "</p>" : "";
       var links = [];
       if (p.tina) links.push('<a href="' + p.tina.url + '">' + (p.tina.platform === "TikTok" ? "Tina\'s video" : "Tina on " + esc(p.tina.platform)) + "</a>");
+      if (tinaExtra(p)) links.push(tinaExtra(p));
       if (p.num) links.push('<a href="' + directionsUrl(p) + '" target="_blank" rel="noopener">Directions</a>');
       links.push('<a href="' + placeHref(p) + '">' + (p.page ? "Full place page" : "On Explore") + "</a>");
       return '<li class="stop"' + last + ' id="stop-' + p.id + '"><div class="pin"><span class="plate"><span class="n">' + esc(p.num || "—") + "</span></span></div>" +
@@ -1331,7 +1353,7 @@
       return '<article class="exrow" id="' + p.id + '">' +
         '<div class="ex-plate f-' + a.siding + '">' + plate(p) + "</div>" +
         '<div class="ex-main"><h3 class="d-s"><a href="' + placeHref(p) + '">' + esc(p.name) + '</a></h3><p class="meta">' + esc(address(p)) + ", " + esc(a.name) + ". " + esc(p.cuisine) + (p.price ? ", " + esc(p.price) : "") + "</p>" +
-        (p.tina && !p.tina.noQuote ? '<p class="hand ex-q">' + esc(p.tina.quote) + '</p><p class="meta"><a href="' + p.tina.url + '">Tina on ' + esc(p.tina.platform) + ", " + esc(p.tina.date) + "</a></p>"
+        (p.tina && !p.tina.noQuote ? '<p class="hand ex-q">' + esc(p.tina.quote) + '</p><p class="meta"><a href="' + p.tina.url + '">Tina on ' + esc(p.tina.platform) + ", " + esc(p.tina.date) + "</a>" + (tinaExtra(p) ? " &middot; " + tinaExtra(p) : "") + "</p>"
           : '<p class="ex-fact">' + tinaLabel(p) + (p.facts && p.facts[0] ? " <span class=\"body\">" + esc(p.facts[0]) + "</span>" : "") + "</p>") +
         '</div><div class="ex-acts">' + saveBtn(p, "btn ghost sm") + '<button class="btn sm" type="button" data-show-on-map="' + p.id + '">' + icon("i-map") + "On the map</button></div></article>";
     }
@@ -1413,15 +1435,31 @@
   var feed = $("[data-feed]");
   if (feed) {
     var posts = D.places.filter(function (p) { return p.tina && !p.tina.noQuote; }).sort(function (a, b) { return b.tina.sort - a.tina.sort; });
-    feed.innerHTML = posts.map(function (p, i) {
+    var shown = 0, BATCH = 12;
+    function postHtml(p) {
       return '<article class="post">' +
         (tiktokId(p.tina.url) ? '<div class="ph ' + p.tone + ' ratio-916 has-video">' + tiktokFrame(p.tina.url, "Tina's TikTok at " + p.name) + "</div>"
           : '<a class="ph ' + p.tone + ' ratio-916" href="' + p.tina.url + '"><span class="tag">' + esc(p.tina.platform) + ", " + esc(p.tina.date) + '</span><span class="post-play" aria-hidden="true"><svg><use href="#i-play"></use></svg></span><span class="sr">Watch Tina\'s ' + esc(p.name) + " video</span></a>") +
         '<p class="note flat">' + esc(p.tina.quote) + "</p>" +
-        '<p class="post-place"><b>' + esc(p.name) + '</b><span class="meta">' + esc(address(p)) + ", " + esc(area(p).name) + "</span></p>" +
+        '<p class="post-place"><b>' + esc(p.name) + '</b><span class="meta">' + esc(address(p)) + ", " + esc(area(p).name) + ". " + esc(p.tina.date) + "</span>" + tinaExtra(p) + "</p>" +
         '<div class="post-acts">' + (p.num ? getThere(p, "door-go") : "") + saveBtn(p, "mini") + "</div></article>";
-    }).join("") +
-      '<article class="post post-next f-mustard clap"><p class="d-s">Where should she go next?</p><p class="body">Tell her about the place you keep telling everyone about.</p><a class="btn sm" href="index.html#street-sec">Suggest a place</a></article>';
+    }
+    var nextCard = '<article class="post post-next f-mustard clap"><p class="d-s">Where should she go next?</p><p class="body">Tell her about the place you keep telling everyone about.</p><a class="btn sm" href="index.html#street-sec">Suggest a place</a></article>';
+    var more = document.createElement("p");
+    more.className = "feed-more";
+    feed.after(more);
+    function showMore(focusFirst) {
+      var next = posts.slice(shown, shown + BATCH);
+      var nc = $(".post-next", feed);
+      if (nc) nc.remove();
+      feed.insertAdjacentHTML("beforeend", next.map(postHtml).join("") + (shown + next.length >= posts.length ? nextCard : ""));
+      if (focusFirst) { var firstNew = $$(".post", feed)[shown]; var lnk = firstNew && $("a, button", firstNew); if (lnk) lnk.focus(); }
+      shown += next.length;
+      more.innerHTML = shown < posts.length ? '<button class="btn" type="button" data-feed-more>Show ' + Math.min(BATCH, posts.length - shown) + " more of her " + posts.length + " places</button>" : '<span class="meta">That\'s all ' + posts.length + " places she\'s posted from on the site. Her full feed is on <a href=\"https://www.tiktok.com/@livetoeatfoodie\">TikTok</a>.</span>";
+      syncSaves();
+    }
+    more.addEventListener("click", function (e) { if (e.target.closest("[data-feed-more]")) showMore(true); });
+    showMore(false);
   }
 
   /* ---------- concept forms (About, For restaurants) ---------- */

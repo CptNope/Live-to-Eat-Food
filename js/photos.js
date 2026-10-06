@@ -55,6 +55,10 @@ var LTEF = window.LTEF = window.LTEF || {};
     "ground-round": "burger", "playa-bowls": "acai", "bocado": "tapas", "panda-buffet": "buffet", "chashu": "ramen",
     "rio-viejo": "franklin-50", "coney-island": "chili-dogs", "pho-dakao": "pho", "baba-sushi": "sushi", "volturno": "neapolitan",
     "wormtown": "beer-taps", "via": "rigatoni", "nuovo": "mezze", "chop-house": "steak", "boulevard-diner": "boulevard",
-    "flying-rhino": "cheeseburger", "leos": "chicken-parm"
+    "leos": "chicken-parm",
+    "deadhorse-hill": "cheeseburger", "armsby-abbey": "burger", "tapa-vino": "tapas", "kuru-kuru": "ramen", "kai-sushi": "sushi",
+    "oishi": "sushi", "kenichi": "sushi", "dalat": "pho", "phoever-whatever": "pho", "saigon": "pho", "anh-thu": "pho",
+    "rice-violet": "red-curry", "basil-n-spice": "red-curry", "la-scala": "rigatoni", "alma-gaucha": "steak", "tropeiros": "steak",
+    "mia-cane": "acai"
   };
 })();

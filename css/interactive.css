@@ -325,3 +325,11 @@ dialog::backdrop{background:rgba(30,31,28,.55)}
 .guide-note{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#F7E3B0;border:2px solid var(--asphalt);padding:10px 14px;margin:0 0 14px}
 .guide-note[hidden]{display:none}
 @media (max-width:900px){.guide-lists,.form-sec{grid-template-columns:minmax(0,1fr)}}
+.tina-extra{font-family:"Archivo",sans-serif;font-size:12.5px;font-weight:650;color:var(--ink-2,#4A4C45)}
+.post-place .tina-extra{display:block;margin-top:2px}
+.feed-more{margin:28px 0 0;display:flex;justify-content:center}
+.dot-bricklt{fill:#C9826F}.sw-bricklt{background:var(--brick-lt)}
+.guides-2{grid-template-columns:1fr 1fr;grid-template-rows:auto;margin-top:18px}
+.guides-2 .guide{grid-row:auto;grid-column:auto}
+@media (max-width:760px){.guides-2{grid-template-columns:minmax(0,1fr)}}
+.guide.f-blue{color:var(--trim)}

@@ -9,7 +9,7 @@ This is not a food blog and not a smaller Yelp. Every screen answers one questio
 | Page | File | What it shows |
 |---|---|---|
 | Home | [`index.html`](index.html) | A working craving sentence that rebuilds the street of places as you change it, Let Tina pick, Watch + Eat, the interactive map, guides, the Sunday list, the editorial policy, the owner path |
-| Explore | [`explore.html`](explore.html) | All 21 places: filter with the same sentence, sort, save, and jump any row onto the map |
+| Explore | [`explore.html`](explore.html) | All 51 places: filter with the same sentence, sort, save, and jump any row onto the map |
 | Tina | [`tina.html`](tina.html) | Who Tina is, where she posts, her latest posts as saveable places, and how she picks |
 | Guides | [`guides.html`](guides.html) | Every guide, with its stops listed |
 | Guide | [`guide.html?g=…`](guide.html?g=new) | One template for every guide: `new`, `shrewsbury-st`, `worth-the-drive` (data in `js/places.js`) |
@@ -462,20 +462,64 @@ The screenshots further down were taken offline, so they still show the art-dire
 
 ### Tina's posts used on the site
 
-Her words appear only as short excerpts from her public TikTok captions, linked to the post. Dates are decoded from each post's ID. Instagram, TikTok and YouTube block automated reading, so these came from search-engine indexes of her captions; her own analytics or an export would give many more.
+Her words appear only as short excerpts from her public TikTok captions, each linked to the post. In October 2026 every one of her 576 TikToks (July 2022 to October 2026) was read through TikTok's own web app, and every restaurant she tagged with a 📍 address was matched against the places here. That check found posts for nine places the site had wrongly marked "Tina hasn't been yet" (Chashu, Rio Viejo, Coney Island, Pho Dakao, Baba Sushi, Volturno, VIA, Nuovo, 111 Chop House) and added 30 more of her spots.
 
-| Place | Address | Tina's line (excerpt) | Post |
-|---|---|---|---|
-| Hungry Bowl | 865 Merriam Ave, Leominster | "It's un-bowl-ievable that I've never tried Mongolian BBQ before." | [TikTok, Feb 2026](https://www.tiktok.com/@livetoeatfoodie/video/7604965242379996430) |
-| American Flatbread Co | 85 Green St, Worcester 01604 | "Please don't crowd the place cause I wanna go back." | [TikTok, May 2025](https://www.tiktok.com/@livetoeatfoodie/video/7509509382808292651) |
-| Racha Thai | 545 Southwest Cutoff, Worcester | "Our favorite Thai place in Worcester has to be Racha Thai" | [TikTok, Mar 2025](https://www.tiktok.com/@livetoeatfoodie/video/7486636461693979946) |
-| honeygrow | 193 Boston Turnpike, Shrewsbury | "Ca-noodling around with some honeygrow - what's your order??" | [TikTok, Jul 2025](https://www.tiktok.com/@livetoeatfoodie/video/7532590916696132919) |
-| Ground Round | 271 Grafton St, Shrewsbury | "We found the most well rounded menu at Ground Round!" | [TikTok, Sept 2025](https://www.tiktok.com/@livetoeatfoodie/video/7554878364746648846) |
-| Playa Bowls | 1 Green Island Blvd, Worcester | "Quit playa-ing around" | [TikTok, Oct 2025](https://www.tiktok.com/@livetoeatfoodie/video/7558980619980541197) |
-| Panda Buffet | Worcester (address not confirmed) | "an average buffet…and I'm still gonna eat there sometimes" | [TikTok, Aug 2025](https://www.tiktok.com/@livetoeatfoodie/video/7537763472541584653) |
-| Bocado Tapas Wine Bar | 82 Winter St, Worcester | Featured on her Instagram (from the strategy research) | [Instagram](https://www.instagram.com/livetoeatfood/) |
+**Posts** counts her TikToks tagged at that place. **Giveaway** marks places in her December 2025 series of gift card giveaways; the site says so on the place, because a reader should know.
 
-Not used: her YouTube video "The Ultimate Worcester Food Guide with Tina Vo" (YouTube rate-limited the request, so its contents weren't read), and Wholly Cannoli, which closed in 2024.
+| Place | Address | Tina's line (excerpt) | Post | Posts |
+|---|---|---|---|---|
+| Phoever Whatever | 433 Park Ave, Worcester | "This stone bowl will keep your meal pho-king hot." | [TikTok, Sept 2026](https://www.tiktok.com/@livetoeatfoodie/video/7689595235499822349) | 2 |
+| Tapa Vino | 160 Green St, Worcester | "Please try the roasted carrots." | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7679824231772867854) | 12 (giveaway Dec 2025) |
+| Deadhorse Hill | 281 Main St, Worcester | "Deadhorse Hill is o-fish-ally back from their summer break serving up some delicious dishes." | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7674244828212759821) | 8 (giveaway Dec 2025) |
+| Mia Cane | 261 Park Ave, Worcester | "Pandan + matcha is a matcha made in heaven." | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7673886535816580365) | 5 |
+| Green Island Oyster | 90 Harding St, Worcester | "I saw they had a lobster roll flight….& I immediately took flight." | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7673158700118347021) | 5 |
+| Dalat | 425 Park Ave, Worcester | "I especially recommend the crab udon noodle soup, rice rolls, and the coco mango slush." | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7672781095653395726) | 3 |
+| Sugi Matcha | 19 Harrison St, Worcester | "Udderly obsessed with the Jasmine specials at Sugi Matcha right now." | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7672003834985663758) | 5 |
+| Volturno | 72 Shrewsbury St, Worcester | "These pizzas are egg-cellent…especially when they're BOGO on Monday/Tuesdays!" | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7669833089807355150) | 5 (giveaway Dec 2025) |
+| Kai Sushi | 232 Chandler St, Worcester | "$85 for all you can eat salmon is a dream." | [TikTok, Jun 2026](https://www.tiktok.com/@livetoeatfoodie/video/7656149480328203533) | 12 (giveaway Dec 2025) |
+| Coney Island Hot Dogs | 158 Southbridge St, Worcester | "Me n my dogs." | [TikTok, Jun 2026](https://www.tiktok.com/@livetoeatfoodie/video/7655378843779239182) | 1 |
+| Baba Sushi | 309 Park Ave, Worcester | "If you don't like sushi….baba bye." | [TikTok, Jun 2026](https://www.tiktok.com/@livetoeatfoodie/video/7652094866901552398) | 3 |
+| La Scala | 183 Shrewsbury St, Worcester | "Our first trip to La Scala was soup-er." | [TikTok, May 2026](https://www.tiktok.com/@livetoeatfoodie/video/7643572101235985678) | 2 |
+| bb.q Chicken | 288 Boston Turnpike, Shrewsbury | "Soy blessed to be eating these wings." | [TikTok, May 2026](https://www.tiktok.com/@livetoeatfoodie/video/7639009491081547021) | 2 |
+| Yolk & Crumb | 1130 Pleasant St, Worcester | "You're in dire knead of this bakery in your life…I'm still shook." | [TikTok, Apr 2026](https://www.tiktok.com/@livetoeatfoodie/video/7630131441434758413) | 3 |
+| Ruby Doo's | 160 Green St, Worcester | "This place serves spud-tacular Korean fusion dishes." | [TikTok, Apr 2026](https://www.tiktok.com/@livetoeatfoodie/video/7629116482634386701) | 5 |
+| Alma Gaúcha | 526 Main St, Worcester | "Alma god, this was delicious." | [TikTok, Apr 2026](https://www.tiktok.com/@livetoeatfoodie/video/7628711132139670797) | 3 |
+| Mercado | 278 Shrewsbury St, Worcester | "Seas the day with a bite at Mercado." | [TikTok, Apr 2026](https://www.tiktok.com/@livetoeatfoodie/video/7627228359784811789) | 1 |
+| Rio Viejo Cocina | 50 Franklin St, Worcester | "Let's taco 'bout this new spot!" | [TikTok, Apr 2026](https://www.tiktok.com/@livetoeatfoodie/video/7626120566881209614) | 1 |
+| Rice Violet | 287 Main St, Worcester | "It's always a rice day when you have a delicious meal at Rice Violet." | [TikTok, Mar 2026](https://www.tiktok.com/@livetoeatfoodie/video/7617999211174415629) | 1 |
+| Oishi | 389 Main St, Worcester | "Does cream cheese belong in sushi?!" | [TikTok, Mar 2026](https://www.tiktok.com/@livetoeatfoodie/video/7616420900228861197) | 1 |
+| Pho Dakao | 593 Park Ave, Worcester | "If you don't like Vietnamese food…what the pho is wrong with you?" | [TikTok, Mar 2026](https://www.tiktok.com/@livetoeatfoodie/video/7614645904292810015) | 1 |
+| Nan Xiang Express | 20 Boston Turnpike, Shrewsbury | "Here's the inside soup about the new dumpling spot in Shrewsbury." | [TikTok, Feb 2026](https://www.tiktok.com/@livetoeatfoodie/video/7611232877405031694) | 2 |
+| Suzette Crêperie | 126 Water St, Worcester | "Life is crepe when you visit Suzette." | [TikTok, Feb 2026](https://www.tiktok.com/@livetoeatfoodie/video/7605668470885338382) | 2 |
+| Hungry Bowl | 865 Merriam Ave, Leominster | "It's un-bowl-ievable that I've never tried Mongolian BBQ before." | [TikTok, Feb 2026](https://www.tiktok.com/@livetoeatfoodie/video/7604965242379996430) | 1 |
+| Tropeiro's Grill | 480 Shrewsbury St, Worcester | "Got beef? Resolve it over a Valentine's meal at Tropeiro's." | [TikTok, Feb 2026](https://www.tiktok.com/@livetoeatfoodie/video/7603498504111131918) | 1 |
+| The Banh Mi Place | 649 Chandler St, Worcester | "Banh mis are like a pate in your mouth." | [TikTok, Feb 2026](https://www.tiktok.com/@livetoeatfoodie/video/7601951796780666143) | 2 |
+| Armsby Abbey | 144 Main St, Worcester | "I can't believe they're opened 7 days a week, so I can always catch a reliable meal here." | [TikTok, Jan 2026](https://www.tiktok.com/@livetoeatfoodie/video/7599655738490817822) | 2 |
+| Sawa | 551 Boston Turnpike, Shrewsbury | "We had a fire time getting hibachi at Sawa!" | [TikTok, Jan 2026](https://www.tiktok.com/@livetoeatfoodie/video/7598247468421238029) | 2 |
+| Saigon | 976 Main St, Worcester | "The cure to a cold New England is Saigon." | [TikTok, Jan 2026](https://www.tiktok.com/@livetoeatfoodie/video/7590867253059538231) | 4 |
+| Kenichi | 270 Shrewsbury St, Worcester | "My siblings have it tu(na) good sometimes." | [TikTok, Dec 2025](https://www.tiktok.com/@livetoeatfoodie/video/7587198150666997005) | 1 |
+| Nuovo | 92 Shrewsbury St, Worcester | "Don't be a pest(o)…get your own dish cause I'm not sharing." | [TikTok, Nov 2025](https://www.tiktok.com/@livetoeatfoodie/video/7578257727940480311) | 3 (giveaway Dec 2025) |
+| Basil N Spice | 299 Shrewsbury St, Worcester | "I never get Thai-ed of the food at Basil N Spice." | [TikTok, Nov 2025](https://www.tiktok.com/@livetoeatfoodie/video/7574222800156724535) | 5 (giveaway Dec 2025) |
+| Kuru Kuru | 160 Green St, Worcester | "Miso obsessed with this black garlic ramen." | [TikTok, Oct 2025](https://www.tiktok.com/@livetoeatfoodie/video/7566713147600522526) | 4 |
+| Playa Bowls | 1 Green Island Blvd, Worcester | "Quit playa-ing around and stop at Playa Bowls." | [TikTok, Oct 2025](https://www.tiktok.com/@livetoeatfoodie/video/7558980619980541197) | 2 |
+| VIA Italian Table | 89 Shrewsbury St, Worcester | "It's im-pasta-ble to resist a delicious meal at VIA." | [TikTok, Oct 2025](https://www.tiktok.com/@livetoeatfoodie/video/7558625087113432351) | 2 |
+| Daphne's Tears | 1094 Pleasant St, Worcester | "You can eat more hole foods at Daphne's Tears." | [TikTok, Sept 2025](https://www.tiktok.com/@livetoeatfoodie/video/7555627253976059191) | 5 (giveaway Dec 2025) |
+| Ground Round | 271 Grafton St, Shrewsbury | "We found the most well rounded menu at Ground Round!" | [TikTok, Sept 2025](https://www.tiktok.com/@livetoeatfoodie/video/7554878364746648846) | 3 (giveaway Dec 2025) |
+| Anh Thu II | 91 Stafford St, Worcester | "My parents' pho-king favorite Vietnamese restaurant in Worcester is Anh Thu II." | [TikTok, Aug 2025](https://www.tiktok.com/@livetoeatfoodie/video/7544009874171088142) | 3 |
+| Little Havana | 160 Green St, Worcester | "It's like a Cuban party in your mouth." | [TikTok, Aug 2025](https://www.tiktok.com/@livetoeatfoodie/video/7539567595729538317) | 7 (giveaway Dec 2025) |
+| Panda Buffet | Worcester (no street address in her post), Worcester | "In summary, it's an average buffet…and I'm still gonna eat there sometimes." | [TikTok, Aug 2025](https://www.tiktok.com/@livetoeatfoodie/video/7537763472541584653) | 1 |
+| Chashu Ramen + Izakaya | 38 Franklin St, Worcester | "That seafood boil ramen special was incredible." | [TikTok, Aug 2025](https://www.tiktok.com/@livetoeatfoodie/video/7536269559175662861) | 3 |
+| Bocado Tapas Wine Bar | 82 Winter St, Worcester | "My tastebuds are on tapas the world when they're eating Bocado." | [TikTok, Aug 2025](https://www.tiktok.com/@livetoeatfoodie/video/7535892018044751159) | 2 |
+| honeygrow | 193 Boston Turnpike, Shrewsbury | "Ca-noodling around with some honeygrow. What's your order?" | [TikTok, Jul 2025](https://www.tiktok.com/@livetoeatfoodie/video/7532590916696132919) | 3 |
+| 111 Chop House | 111 Shrewsbury St, Worcester | "Do not miss out on the haddock or the brussel sprouts - absolute bangers." | [TikTok, Jul 2025](https://www.tiktok.com/@livetoeatfoodie/video/7528793973931003191) | 1 |
+| Island Fin | 41 Park Ave, Worcester | "Their portion size is truly unbeatable." | [TikTok, Jun 2025](https://www.tiktok.com/@livetoeatfoodie/video/7514758388362808618) | 2 |
+| American Flatbread Co | 85 Green St, Worcester | "Please don't crowd the place cause I wanna go back." | [TikTok, May 2025](https://www.tiktok.com/@livetoeatfoodie/video/7509509382808292651) | 1 |
+| Om Indian Grill | 118 Water St, Worcester | "This has been the best Indian cuisine I've had in a long time!" | [TikTok, May 2025](https://www.tiktok.com/@livetoeatfoodie/video/7507677318111022382) | 4 |
+| Racha Thai | 545 Southwest Cutoff, Worcester | "Our favorite Thai place in Worcester has to be Racha Thai." | [TikTok, Mar 2025](https://www.tiktok.com/@livetoeatfoodie/video/7486636461693979946) | 5 |
+
+Still "hasn't been yet" after the full check: Wormtown Brewery, the Boulevard Diner and Leo's Ristorante. Flying Rhino Café closed in June 2025 after 25 years ([Worcester Business Journal](https://www.wbjournal.com/article/flying-rhino-closes-location-taken-over-by-long-time-worcester-restaurateurs)); its space at 278 Shrewsbury St is now Mercado, Peruvian and Ecuadorian ([OpenTable](https://www.opentable.com/r/mercado-restaurant-worcester)), which Tina has posted about.
+
+Not used: her Instagram and YouTube (both need a sign-in to read in bulk), her non-food posts (shopping, wellness, events), and restaurants outside Central Mass. Wholly Cannoli closed in 2024.
 
 ### Facts from other sources
 
@@ -485,20 +529,15 @@ Not used: her YouTube video "The Ultimate Worcester Food Guide with Tina Vo" (Yo
 - Bocado Tapas Wine Bar, 82 Winter St — [OpenTable](https://www.opentable.ie/bocado-tapas-wine-bar-worcester)
 - Shrewsbury Street addresses (Volturno 72, VIA 89, Nuovo 92, 111 Chop House 111, Boulevard Diner 155) — [Discover Central MA](https://www.discovercentralma.org/articles/post/shrewsbury-street/)
 
-### Places Tina hasn't posted about (listed, no opinion)
-
-These fill out the map and Explore. Each shows a fact from the source, never a take.
+### Facts for places Tina hasn't posted about
 
 | Place | Address | Fact used | Source |
 |---|---|---|---|
-| Chashu Ramen + Izakaya | 38 Franklin St, Worcester | Ramen and izakaya, downtown | [Worcester Business Journal](https://www.wbjournal.com/article/chashu-ramen-izakaya-opens-in-worcester) |
-| Rio Viejo Cocina | 50 Franklin St, Worcester | Owner Jaime Avila started with the Taco Libre food truck | [Worcester Business Journal](https://wbjournal.com/article/new-mexican-restaurant-opens-in-worcester/) |
-| George's Coney Island Hot Dogs | 158 Southbridge St, Worcester | Open since 1918; neon sign from 1938 | [Fifty Plus Advocate](https://www.fiftyplusadvocate.com/2024/10/07/coney-island-hot-dogs-has-been-a-worcester-institution-for-more-than-a-century), [NBC Boston](https://www.nbcboston.com/news/local/georges-coney-island-in-worcester-to-restore-iconic-hot-dog-sign/3598633/) |
 | Boulevard Diner | 155 Shrewsbury St, Worcester | Worcester Lunch Car Company car no. 730, 1936 | [Wikipedia](https://en.wikipedia.org/wiki/Boulevard_Diner) |
-| Pho Dakao | 593 Park Ave, Worcester | Pho, noodle soups and vermicelli | [Allmenus](https://www.allmenus.com/ma/worcester/42524-pho-dakao/menu/) |
-| Baba Sushi | 309 Park Ave, Worcester | Sushi on Park Ave | [Toast](https://www.toasttab.com/local/order/baba-sushi-worcester-309-park-ave/item-_a0a14afd-6e53-48d7-8629-129c4314d6cb) |
-| Volturno, VIA Italian Table, Nuovo, 111 Chop House, Flying Rhino Café, Leo's Ristorante | Shrewsbury Street | Restaurant Row addresses | [Discover Central MA](https://www.discovercentralma.org/articles/post/shrewsbury-street/) |
+| Leo's Ristorante | 11 Leo Turo Way, Worcester | Italian, just off Shrewsbury St | [Discover Central MA](https://www.discovercentralma.org/articles/post/shrewsbury-street/) |
 | Wormtown Brewery | 72 Shrewsbury St, Worcester | Shares the address with Volturno | [Wormtown Brewery](https://www.wormtownbrewery.com/worcester-taproom) |
+
+Facts kept for places she has now posted about: Chashu ([WBJ](https://www.wbjournal.com/article/chashu-ramen-izakaya-opens-in-worcester)), Rio Viejo ([WBJ](https://wbjournal.com/article/new-mexican-restaurant-opens-in-worcester/)), George's Coney Island ([Fifty Plus Advocate](https://www.fiftyplusadvocate.com/2024/10/07/coney-island-hot-dogs-has-been-a-worcester-institution-for-more-than-a-century), [NBC Boston](https://www.nbcboston.com/news/local/georges-coney-island-in-worcester-to-restore-iconic-hot-dog-sign/3598633/)), Pho Dakao ([Allmenus](https://www.allmenus.com/ma/worcester/42524-pho-dakao/menu/)), Shrewsbury Street addresses ([Discover Central MA](https://www.discovercentralma.org/articles/post/shrewsbury-street/)). Details like "BOGO on Mondays and Tuesdays" or "$85 all-you-can-eat salmon" come from Tina's own captions and are dated.
 
 ### Photo credits
 
@@ -528,7 +567,7 @@ All photos are from [Wikimedia Commons](https://commons.wikimedia.org/) and are 
 | [Rigatoni Alla Carbonara, Pinocchio](https://commons.wikimedia.org/wiki/File:Rigatoni_Alla_Carbonara_-_Pinocchio_2023-07-04.jpg) | VIA Italian Table | Stand-in | Andy Li | CC0 |
 | [Mezze Platter](https://commons.wikimedia.org/wiki/File:Mezze_Platter.jpg) | Nuovo | Stand-in | Satdeep Gill | CC BY-SA 4.0 |
 | [Minute steak at Manhattan Steak House](https://commons.wikimedia.org/wiki/File:Minute_steak_at_restaurant_Manhattan_Steak_House.jpg) | 111 Chop House | Stand-in | JIP | CC BY-SA 4.0 |
-| [Cheese meltdown beef burger](https://commons.wikimedia.org/wiki/File:Cheese_meltdown_beef_burger_-_The_Perkin_Warbeck_2025-07-26.jpg) | Flying Rhino Café | Stand-in | Andy Li | CC0 |
+| [Cheese meltdown beef burger](https://commons.wikimedia.org/wiki/File:Cheese_meltdown_beef_burger_-_The_Perkin_Warbeck_2025-07-26.jpg) | Deadhorse Hill | Stand-in | Andy Li | CC0 |
 | [Mamma Tanino's 08 (chicken parmigiana)](https://commons.wikimedia.org/wiki/File:Mamma_Tanino%27s_-_November_2024_-_Sarah_Stierch_08.jpg) | Leo's Ristorante | Stand-in | Missvain (Sarah Stierch) | CC0 |
 
 Tina's videos (all seven, by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/@livetoeatfoodie)) appear through TikTok's embed player on Home (latest find, Watch + Eat), the place page and the Tina page.
@@ -559,7 +598,7 @@ Tina's videos (all seven, by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/
 │   ├── ltef.css        All tokens and component styles
 │   └── interactive.css Save, drawer, dialog, listbox, street, map pins, explore, Tina page
 ├── js/
-│   ├── places.js       The data: 21 places, areas, cravings, Tina's posts, video moments
+│   ├── places.js       The data: 51 places (48 with Tina's posts), areas, cravings, Tina's posts, video moments
 │   ├── photos.js       Credited Wikimedia Commons photos and which place shows which
 │   └── app.js          All interactions (vanilla JS, no dependencies)
 ├── assets/logos/       Outlined SVG logo files
