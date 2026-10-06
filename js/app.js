@@ -148,6 +148,25 @@
       el.insertAdjacentHTML("beforeend", html);
     });
   }
+  /* home hero: Tina's newest dated post in the data, so the "latest find" never lags the data */
+  (function renderLatest() {
+    var box = document.querySelector("article.latest");
+    if (!box) return;
+    var p = D.places.filter(function (x) { return x.tina && x.tina.url && x.num; })
+      .sort(function (a, b) { return (b.tina.sort || 0) - (a.tina.sort || 0); })[0];
+    if (!p) return;
+    var a = area(p), t = p.tina, u = esc(t.url);
+    box.innerHTML = '<div class="window thick">' +
+      '<div class="ph ' + p.tone + ' ratio-45" data-tiktok="' + u + '" data-title="' + esc("Tina's TikTok at " + p.name + ", " + a.town) + '">' +
+        '<span class="tag">Tina\'s TikTok, ' + esc(t.date) + "</span>" +
+        '<p class="cap"><b>Tina\'s ' + esc(p.name) + ' video</b><a href="' + u + '" style="color:inherit">Watch it on TikTok</a></p></div>' +
+      '<div class="latest-bar"><div>' +
+        '<h2 id="latest-h" class="d-s"><a href="' + u + '" style="text-decoration:none">' + esc(p.name) + "</a></h2>" +
+        '<p class="meta" style="margin:4px 0 0">Tina\'s latest find, ' + esc(p.dish.charAt(0).toLowerCase() + p.dish.slice(1)) + "</p></div>" +
+        '<a class="plate" href="' + directionsUrl(p) + '" target="_blank" rel="noopener" aria-label="' + esc("Directions to " + p.name + ", " + fullAddress(p)) + '">' +
+          '<span class="n">' + esc(p.num) + '</span><span class="st"><b>' + esc(p.street) + "</b>" + esc(a.town || a.name) + "</span></a></div></div>" +
+      '<p class="note">' + esc(t.quote) + '<small><a href="' + u + '">Tina on ' + esc(t.platform) + ", " + esc(t.date) + "</a></small></p>";
+  })();
   hydratePhotos(document);
   hydrateVideos(document);
 
@@ -325,7 +344,7 @@
   function tinaPick(st) {
     var pool = D.places.filter(function (p) { return p.tina && p.num && matches(p, { craving: st.craving, where: st.where, with: st.with, tinaOnly: true }); });
     var note = "";
-    if (!pool.length) { pool = D.places.filter(function (p) { return p.tina && p.num; }); note = "Nothing of hers matched exactly, so here's one she loved anyway."; }
+    if (!pool.length) { pool = D.places.filter(function (p) { return p.tina && p.num; }); note = "Nothing she's posted about matches that exactly, so here's another place she has posted about. Change the sentence to narrow it down."; }
     if (!note && pool.length === 1) note = "She's only posted one place that fits. Change the sentence for more.";
     var options = pool.filter(function (p) { return p.id !== lastPick; });
     var p = (options.length ? options : pool)[Math.floor(Math.random() * (options.length ? options.length : pool.length))];
@@ -350,7 +369,7 @@
     var a = area(p);
     var top = p.tina && !p.tina.noQuote
       ? '<p class="note flat">' + esc(p.tina.quote) + '<small><a href="' + p.tina.url + '">Tina on ' + esc(p.tina.platform) + ", " + esc(p.tina.date) + "</a></small></p>"
-      : p.tina ? '<p class="note flat">Tina featured this one.<small><a href="' + p.tina.url + '">On her Instagram</a></small></p>'
+      : p.tina ? '<p class="note flat">Tina posted about this one.<small><a href="' + p.tina.url + '">See her post on ' + esc(p.tina.platform) + "</a></small></p>"
       : '<div class="notyet"><span class="lbl unclaimed">Tina hasn\'t been yet</span>' + (p.facts && p.facts[0] ? '<p class="fact">' + esc(p.facts[0]) + "</p>" : "") + "</div>";
     return '<div class="plot" style="--h:' + heights[i % heights.length] + 'px">' +
       '<article class="house f-' + a.siding + '">' +

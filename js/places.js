@@ -290,10 +290,15 @@ LTEF.places = [
     cuisine: "Hibachi", cravings: [], with: ["group", "family"],
     dish: "Hibachi at the grill", tone: "t-night", x: 652, y: 352,
     tina: { quote: "We had a fire time getting hibachi at Sawa!", date: "Jan 2026", sort: 20260122, url: "https://www.tiktok.com/@livetoeatfoodie/video/7598247468421238029", platform: "TikTok", posts: 2 },
-    facts: [] }
+    facts: [] },
+  { id: "motw-coffee", name: "MOTW Coffee", num: "378", street: "Maple Ave", area: "shrewsbury",
+    cuisine: "Coffee and pastries", cravings: ["sweet", "quick"], with: ["anyone"],
+    dish: "Matcha drinks and pastries", tone: "t-green", x: 676, y: 326,
+    tina: { quote: "I've been going bananas for matcha everywhere.", date: "Oct 2026", sort: 20261006, url: "https://www.tiktok.com/@livetoeatfoodie/video/7693342291343248653", platform: "TikTok", posts: 1 },
+    facts: ["Suite 3108, 378 Maple Ave, Shrewsbury, per Tina's post."] }
 ];
 
-/* Watch + Eat: each of Tina's videos as a menu of moments. Step names replace timestamps until videos are imported. */
+/* Watch + Eat: each of Tina's videos as a menu of moments, labeled by step (no video timestamps). */
 LTEF.videos = [
   { id: "american-flatbread", title: "American Flatbread Co, 85 Green St", date: "May 28, 2025", tone: "t-pie",
     url: "https://www.tiktok.com/@livetoeatfoodie/video/7509509382808292651",

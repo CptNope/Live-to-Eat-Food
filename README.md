@@ -1,6 +1,6 @@
 # Live to Eat Food
 
-Design concept and brand book for **Live to Eat Food**, Tina's creator-led food discovery platform for Worcester and Central Massachusetts.
+A design concept for **Live to Eat Food**, Tina's creator-led food discovery platform for Worcester and Central Massachusetts, with one brand direction explored for it. The logo, palette, type and voice rules below are a proposal for Tina to react to, not an identity she has adopted.
 
 This is not a food blog and not a smaller Yelp. Every screen answers one question, *where should we eat?*, with a real person's judgment on top and a way to get there underneath.
 
@@ -9,7 +9,7 @@ This is not a food blog and not a smaller Yelp. Every screen answers one questio
 | Page | File | What it shows |
 |---|---|---|
 | Home | [`index.html`](index.html) | A working craving sentence that rebuilds the street of places as you change it, Let Tina pick, Watch + Eat, the interactive map, guides, the Sunday list, the editorial policy, the owner path |
-| Explore | [`explore.html`](explore.html) | All 51 places: filter with the same sentence, sort, save, and jump any row onto the map |
+| Explore | [`explore.html`](explore.html) | All 52 places: filter with the same sentence, sort, save, and jump any row onto the map |
 | Tina | [`tina.html`](tina.html) | Who Tina is, where she posts, her latest posts as saveable places, and how she picks |
 | Guides | [`guides.html`](guides.html) | Every guide, with its stops listed |
 | Guide | [`guide.html?g=…`](guide.html?g=new) | One template for every guide: `new`, `shrewsbury-st`, `worth-the-drive` (data in `js/places.js`) |
@@ -17,12 +17,21 @@ This is not a food blog and not a smaller Yelp. Every screen answers one questio
 | For restaurants | [`owners.html`](owners.html) | Claim a listing, fix hours, tell us you're opening, invite Tina, advertise (labeled), work with us |
 | Place page | [`place.html`](place.html) | A restaurant as a three-floor editorial feature (American Flatbread Co, 85 Green St) |
 | Guide | [`guide.html`](guide.html) | "New since 2025, and Tina's already been": three openings as a route of house numbers |
-| Brand book | [`brand.html`](brand.html) | The system on one page: idea, logo, color, type, Tina's hand, trust labels, components, photography, voice |
+| Brand direction | [`brand.html`](brand.html) | One direction explored for the brand, on one page: idea, logo, color, type, Tina's hand, trust labels, components, photography, voice |
 | Design canvas | [`design/canvas/`](design/canvas/index.html) | The six artboards from the Claude design canvas (Home, Place, Guide at desktop and phone width), exported as clickable pages, with a phone-frame viewer |
 
 > **Concept status.** Tina's notes are short excerpts from her own public TikTok captions, each linked to the original post. Restaurants, addresses and facts are real and sourced below. Photos are openly licensed from Wikimedia Commons and credited on each image; dish photos badged **Stand-in** were taken somewhere else. Tina's videos play in TikTok's own embed player. Pages carry `noindex` so the concept doesn't appear in search results.
 
 ![Home, desktop, first view](docs/screens/home-desktop-first-view.jpg)
+
+
+## Rights and status
+
+This repository is a private design concept that Jeremy Anderson prepared for Tina Vo. It is not open source and carries no license: no permission is given to copy, modify, publish or reuse it.
+
+- "Live to Eat Food", Tina's name, her words and her videos belong to her. Her captions appear only as short excerpts, each linked to the original post.
+- The logo, palette, type and voice rules are one direction explored for her brand. Nothing in them is adopted until she says so.
+- Third-party photos keep their own Creative Commons licenses, listed under Photo credits.
 
 ---
 
@@ -220,7 +229,7 @@ All styles live in [`css/ltef.css`](css/ltef.css). Every component is plain, sem
 | Photo window | `.window`, `.window.thick`, `.ph` + dish tone (`.t-broth`, `.t-chili`, `.t-pie`, `.t-tuna`, `.t-green`, `.t-saffron`, `.t-diner`, `.t-night`, `.t-room`, `.t-cream`), ratio (`.ratio-45`, `-43`, `-11`, `-32`, `-916`); `data-photo` / `data-tiktok` fill it (`.has-photo`, `.ph-credit`, `.ph-stand`, `.has-video`) | Without a photo it shows the ratio and a one-line shot brief |
 | Tina note | `.note`, `.note.flat`, `.verdict`, `.verdict.skip`, `.sig` | See [Tina's hand](#8-tinas-hand) |
 | Trust labels | `.lbl.tina`, `.lbl.verified`, `.lbl.unclaimed`, `.lbl.sponsored`, `.lbl.affiliate` | See [Trust and labels](#9-trust-and-labels) |
-| Video menu (Watch + Eat) | `.reel`, `.scrub`, `.onscreen` (`li.now` for the active row) | Each timestamp links a moment to the dish, Tina's line and an action; the last row is always the address with Directions |
+| Video menu (Watch + Eat) | `.reel`, `.scrub`, `.onscreen` (`li.now` for the active row) | Each step (Where, Eat, Verdict, Go) links a moment to the dish, Tina's line and an action; the last row is always the address with Directions |
 | Map | `.mapgrid`, `.map`, `.maplist`, `.ml-item`, `.cluster`, `.map-label`, `.map-jump`, `.map-tools`, `.map-tip` | Schematic SVG map with pan and zoom, clusters and neighborhood jumps, plus a filterable list (Tina's picks, Everywhere, Saved) |
 | Guide cover | `.guide`, `.guide.big`, `.line`, `.line-plates`, `.line-labels` | Route line with house-number plates or meal/town stops |
 | Route stop | `.route`, `.stop`, `.stop.compact`, `.stop.sponsor`, `.pin` | Visited stops get photo and take; unvisited stops are compact rows; sponsored stops are hatched with a `$` plate |
@@ -346,7 +355,7 @@ Icons sit beside a text label; play is the only icon-only control and carries an
 One authored moment per screen, from a visible resting state:
 
 - **Save:** the bookmark fills and the Saved count ticks up (180ms ease-out).
-- **Watch + Eat:** the active row follows the playhead; tapping a row seeks the video.
+- **Watch + Eat:** tapping a step highlights it and moves the bar under the video. The video plays in TikTok's own player and is not synced to the steps.
 - **Craving slot change:** the slot word crossfades (150ms) and the result count updates.
 
 No scroll-triggered entrances, no parallax on text, nothing hidden at rest. `prefers-reduced-motion` removes every transition.
@@ -445,9 +454,9 @@ The screenshots further down were taken offline, so they still show the art-dire
 |---|---|
 | ![Let Tina pick dialog](docs/screens/tina-pick.jpg) | ![Saved places drawer](docs/screens/saved-drawer.jpg) |
 
-| "New since 2025" guide | Brand book page |
+| "New since 2025" guide | Brand direction page |
 |---|---|
-| ![Guide page, desktop](docs/screens/guide-desktop.jpg) | ![Brand book page, desktop](docs/screens/brand-book.jpg) |
+| ![Guide page, desktop](docs/screens/guide-desktop.jpg) | ![Brand direction page, desktop](docs/screens/brand-book.jpg) |
 
 ### Design canvas
 
@@ -459,7 +468,7 @@ The concept was first laid out on a design canvas in Claude: six artboards, Home
 
 ### What each screen proves
 
-- **Home.** Discovery is a sentence, not a wall of filter pills. Tina's latest find leads. "Where Tina ate lately" is a street of uneven houses ending in an empty lot. Watch + Eat turns a reel into a timestamped menu. The map is schematic and branded, with towns on drive-time rings. Guides are routes. The Sunday list is a paper list. The editorial policy is a painted sign. The owner path sits quietly at the bottom.
+- **Home.** Discovery is a sentence, not a wall of filter pills. Tina's latest find leads. "Where Tina ate lately" is a street of uneven houses ending in an empty lot. Watch + Eat turns a reel into a step-by-step menu. The map is schematic and branded, with towns on drive-time rings. Guides are routes. The Sunday list is a paper list. The editorial policy is a painted sign. The owner path sits quietly at the bottom.
 - **Place page.** Someone in the Canal District at 6:30 pm sees Tina's line first, then what's there, then the door: address plate, Directions, Menu, Book a lane, the facts and when they were checked. On phones the tab bar becomes a door bar.
 - **Explore.** The same sentence over every place on file. Tina's places carry her line in her hand; the rest carry one sourced fact and a dashed "Tina hasn't been yet" label, never an invented opinion.
 - **Tina.** Her accounts, her latest posts as places you can save, and the three rules she picks by.
@@ -477,6 +486,7 @@ Her words appear only as short excerpts from her public TikTok captions, each li
 
 | Place | Address | Tina's line (excerpt) | Post | Posts |
 |---|---|---|---|---|
+| MOTW Coffee | 378 Maple Ave, Suite 3108, Shrewsbury | "I've been going bananas for matcha everywhere." | [TikTok, Oct 2026](https://www.tiktok.com/@livetoeatfoodie/video/7693342291343248653) | 1 |
 | Phoever Whatever | 433 Park Ave, Worcester | "This stone bowl will keep your meal pho-king hot." | [TikTok, Sept 2026](https://www.tiktok.com/@livetoeatfoodie/video/7689595235499822349) | 2 |
 | Tapa Vino | 160 Green St, Worcester | "Please try the roasted carrots." | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7679824231772867854) | 12 (giveaway Dec 2025) |
 | Deadhorse Hill | 281 Main St, Worcester | "Deadhorse Hill is o-fish-ally back from their summer break serving up some delicious dishes." | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7674244828212759821) | 8 (giveaway Dec 2025) |
@@ -525,6 +535,19 @@ Her words appear only as short excerpts from her public TikTok captions, each li
 | American Flatbread Co | 85 Green St, Worcester | "Please don't crowd the place cause I wanna go back." | [TikTok, May 2025](https://www.tiktok.com/@livetoeatfoodie/video/7509509382808292651) | 1 |
 | Om Indian Grill | 118 Water St, Worcester | "This has been the best Indian cuisine I've had in a long time!" | [TikTok, May 2025](https://www.tiktok.com/@livetoeatfoodie/video/7507677318111022382) | 4 |
 | Racha Thai | 545 Southwest Cutoff, Worcester | "Our favorite Thai place in Worcester has to be Racha Thai." | [TikTok, Mar 2025](https://www.tiktok.com/@livetoeatfoodie/video/7486636461693979946) | 5 |
+
+**Added 6 October 2026:** MOTW Coffee, her newest post, which the home page leads with as her latest find. Her other posts since 25 September (1885, The Fix, Vincent's, Bagel Time, LUNO Pizza, and repeat visits to Racha Thai, Sugi Matcha, Yolk & Crumb and Deadhorse Hill) are not in the data yet.
+
+**More lines from the same posts.** A few places quote a second line from a post already listed above. Each is word for word from that caption, with only emoji removed:
+
+| Line | Where it's used | Post |
+|---|---|---|
+| "L(oven) this new establishment." | Watch + Eat, American Flatbread | [TikTok, May 2025](https://www.tiktok.com/@livetoeatfoodie/video/7509509382808292651) |
+| "It's so much fun!" | Watch + Eat verdict and the "New since 2025" guide card, American Flatbread | [TikTok, May 2025](https://www.tiktok.com/@livetoeatfoodie/video/7509509382808292651) |
+| "Thank goodness Hungry Bowl opened in Leominster." | Watch + Eat and the "New since 2025" guide note, Hungry Bowl | [TikTok, Feb 2026](https://www.tiktok.com/@livetoeatfoodie/video/7604965242379996430) |
+| "I'm gonna be a regular here now." | Park Ave guide note, Dalat | [TikTok, Aug 2026](https://www.tiktok.com/@livetoeatfoodie/video/7672781095653395726) |
+| "If your man don't bring you to Chashu …let that man-go." | Design canvas, Home artboards (Watch + Eat) | [TikTok, Apr 2026](https://www.tiktok.com/@livetoeatfoodie/video/7632495025405840653) |
+| "their sushi menu is on pause since this video was filmed…but just roll with it." | Design canvas, Home artboards (Watch + Eat) | [TikTok, May 2026](https://www.tiktok.com/@livetoeatfoodie/video/7643165386283830541) |
 
 Still "hasn't been yet" after the full check: Wormtown Brewery, the Boulevard Diner and Leo's Ristorante. Flying Rhino Café closed in June 2025 after 25 years ([Worcester Business Journal](https://www.wbjournal.com/article/flying-rhino-closes-location-taken-over-by-long-time-worcester-restaurateurs)); its space at 278 Shrewsbury St is now Mercado, Peruvian and Ecuadorian ([OpenTable](https://www.opentable.com/r/mercado-restaurant-worcester)), which Tina has posted about.
 
@@ -579,12 +602,11 @@ All photos are from [Wikimedia Commons](https://commons.wikimedia.org/) and are 
 | [Cheese meltdown beef burger](https://commons.wikimedia.org/wiki/File:Cheese_meltdown_beef_burger_-_The_Perkin_Warbeck_2025-07-26.jpg) | Deadhorse Hill | Stand-in | Andy Li | CC0 |
 | [Mamma Tanino's 08 (chicken parmigiana)](https://commons.wikimedia.org/wiki/File:Mamma_Tanino%27s_-_November_2024_-_Sarah_Stierch_08.jpg) | Leo's Ristorante | Stand-in | Missvain (Sarah Stierch) | CC0 |
 
-Tina's videos (all seven, by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/@livetoeatfoodie)) appear through TikTok's embed player on Home (latest find, Watch + Eat), the place page and the Tina page.
+Tina's videos (by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/@livetoeatfoodie)) appear through TikTok's embed player on Home (latest find, Watch + Eat), the place page and the Tina page.
 
 ### Still placeholder
 
 - Photos of the places themselves, except the Boulevard Diner, 50 Franklin St and Kelley Square. Everything badged Stand-in should be replaced with Tina's own shots.
-- Watch + Eat timestamps (filled in when a video is imported).
 - What Tina ordered at American Flatbread, dish by dish.
 - Hours for every place (none are verified), and price bands where none is listed.
 - The Stories interview, the sponsor, and the drive-time rings (approximate). Map positions are schematic, not to scale.
@@ -602,12 +624,12 @@ Tina's videos (all seven, by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/
 ├── guides.html         Every guide
 ├── about.html          Editorial policy, how Tina picks, events, stories, contact
 ├── owners.html         For restaurants: claim, fix, opening, invite, advertise, work with us
-├── brand.html          Brand book page
+├── brand.html          Brand direction page (one explored direction)
 ├── css/
 │   ├── ltef.css        All tokens and component styles
 │   └── interactive.css Save, drawer, dialog, listbox, street, map pins, explore, Tina page
 ├── js/
-│   ├── places.js       The data: 51 places (48 with Tina's posts), areas, cravings, Tina's posts, video moments
+│   ├── places.js       The data: 52 places (49 with Tina's posts), areas, cravings, Tina's posts, video moments
 │   ├── photos.js       Credited Wikimedia Commons photos and which place shows which
 │   └── app.js          All interactions (vanilla JS, no dependencies)
 ├── assets/logos/       Outlined SVG logo files
@@ -629,7 +651,7 @@ Tina's videos (all seven, by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/
 The concept is static HTML on purpose: the design is proven before any CMS decisions. When the build starts:
 
 - **Theme:** a block theme. Map `design/tokens.json` into `theme.json` (`settings.color.palette`, `settings.typography.fontFamilies` and `fontSizes`, `settings.spacing.spacingSizes`), and keep `css/ltef.css` component rules as block styles and patterns.
-- **Content model** (custom post types and taxonomies): Restaurants (address, street number, area, cuisine, price band, hours, menu/reserve/order URLs, claim status, last-verified date), Tina's takes and dish verdicts, Videos (with timestamped moments linked to dishes), Guides (ordered stops), People stories, Events, Towns/Neighborhoods (each with its siding color), Cuisines.
+- **Content model** (custom post types and taxonomies): Restaurants (address, street number, area, cuisine, price band, hours, menu/reserve/order URLs, claim status, last-verified date), Tina's takes and dish verdicts, Videos (with moments linked to dishes), Guides (ordered stops), People stories, Events, Towns/Neighborhoods (each with its siding color), Cuisines.
 - **Interactions:** `js/places.js` mirrors the content model, so `js/app.js` can move to a block theme's view script reading the same fields from the REST API.
 - **Patterns:** House, Address plate, Craving sentence, Watch + Eat menu, Route stop, Policy sign, Sunday list signup.
 - **Rules to enforce in the editor:** sponsored blocks can't use the Tina note style; "Tina ate here" requires a visit date; Restaurant schema (`schema.org/Restaurant`) generated from the same fields shown on the page.
