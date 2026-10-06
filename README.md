@@ -18,6 +18,7 @@ This is not a food blog and not a smaller Yelp. Every screen answers one questio
 | Place page | [`place.html`](place.html) | A restaurant as a three-floor editorial feature (American Flatbread Co, 85 Green St) |
 | Guide | [`guide.html`](guide.html) | "New since 2025, and Tina's already been": three openings as a route of house numbers |
 | Brand book | [`brand.html`](brand.html) | The system on one page: idea, logo, color, type, Tina's hand, trust labels, components, photography, voice |
+| Design canvas | [`design/canvas/`](design/canvas/index.html) | The six artboards from the Claude design canvas (Home, Place, Guide at desktop and phone width), exported as clickable pages, with a phone-frame viewer |
 
 > **Concept status.** Tina's notes are short excerpts from her own public TikTok captions, each linked to the original post. Restaurants, addresses and facts are real and sourced below. Photos are openly licensed from Wikimedia Commons and credited on each image; dish photos badged **Stand-in** were taken somewhere else. Tina's videos play in TikTok's own embed player. Pages carry `noindex` so the concept doesn't appear in search results.
 
@@ -448,6 +449,14 @@ The screenshots further down were taken offline, so they still show the art-dire
 |---|---|
 | ![Guide page, desktop](docs/screens/guide-desktop.jpg) | ![Brand book page, desktop](docs/screens/brand-book.jpg) |
 
+### Design canvas
+
+The concept was first laid out on a design canvas in Claude: six artboards, Home, Place (Chashu Ramen + Izakaya) and Guide (Shrewsbury Street), each at desktop (1440) and phone (390) width. They are exported to [`design/canvas/`](design/canvas/index.html) as plain pages; links between artboards work, and [`phone.html`](design/canvas/phone.html?b=home-phone) shows the phone artboards in a 390-wide frame. The canvas's own files are kept unchanged in `design/canvas/source/` (`canvas.json`, the six `*.dc.html` artboards, the design system's `tokens.json` and `bundle.css`). The canvas and the site share the same rules: Tina's lines come only from her posts, and the artboards only say "Tina ate here" where she has posted.
+
+| Home artboard, desktop | Place artboard, phone |
+|---|---|
+| ![Home artboard, desktop](design/canvas/screens/home.jpg) | ![Place artboard, phone](design/canvas/screens/place-phone.jpg) |
+
 ### What each screen proves
 
 - **Home.** Discovery is a sentence, not a wall of filter pills. Tina's latest find leads. "Where Tina ate lately" is a street of uneven houses ending in an empty lot. Watch + Eat turns a reel into a timestamped menu. The map is schematic and branded, with towns on drive-time rings. Guides are routes. The Sunday list is a paper list. The editorial policy is a painted sign. The owner path sits quietly at the bottom.
@@ -603,7 +612,8 @@ Tina's videos (all seven, by Tina Vo, [@livetoeatfoodie](https://www.tiktok.com/
 │   └── app.js          All interactions (vanilla JS, no dependencies)
 ├── assets/logos/       Outlined SVG logo files
 ├── design/
-│   └── tokens.json     Color, type, spacing, radius and border tokens
+│   ├── tokens.json     Color, type, spacing, radius and border tokens
+│   └── canvas/         Design canvas export: artboard pages, phone frame, screens/, source/
 ├── docs/screens/       Screenshots used in this README
 └── .nojekyll           Serve files as-is on GitHub Pages
 ```

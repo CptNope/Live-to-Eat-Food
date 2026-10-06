@@ -1,0 +1,93 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Guide-mobile.dc.html": {
+      "h": 4384,
+      "title": "Shrewsbury Street guide, phone",
+      "w": 390,
+      "x": 5500,
+      "y": 0,
+      "is_interactive": true
+    },
+    "Guide.dc.html": {
+      "expand": "fill",
+      "h": 3047,
+      "title": "Shrewsbury Street guide, desktop",
+      "w": 1440,
+      "x": 3980,
+      "y": 0,
+      "is_interactive": true
+    },
+    "Home-mobile.dc.html": {
+      "h": 8000,
+      "title": "Home, phone",
+      "w": 390,
+      "x": 1520,
+      "y": 0,
+      "is_interactive": true
+    },
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 8000,
+      "title": "Home, desktop",
+      "w": 1440,
+      "x": 0,
+      "y": 0,
+      "is_interactive": true
+    },
+    "Place-mobile.dc.html": {
+      "h": 5189,
+      "title": "Place page, phone",
+      "w": 390,
+      "x": 3510,
+      "y": 0,
+      "is_interactive": true
+    },
+    "Place.dc.html": {
+      "expand": "fill",
+      "h": 3273,
+      "title": "Place page, desktop",
+      "w": 1440,
+      "x": 1990,
+      "y": 0,
+      "is_interactive": true
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-04T21:40:00Z",
+    "v": 1
+  },
+  "designSystems": [
+    {
+      "artifact": "https://claude.ai/artifact/R9VXmqH8KofQMxsyUmBTfz",
+      "copiedAt": "2026-10-04T21:40:00Z",
+      "namespace": "livetoeatfood",
+      "title": "Live to Eat Food",
+      "version": "1791149363-6fb0"
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "t1": {
+      "kind": "title1",
+      "maxW": 5890,
+      "text": "Live to Eat Food, first concept: home, place page, guide (Tina's lines from her TikToks)",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Home-mobile.dc.html",
+    "Place.dc.html",
+    "Place-mobile.dc.html",
+    "Guide.dc.html",
+    "Guide-mobile.dc.html"
+  ],
+  "pages": [],
+  "title": "Live to Eat Food Screens"
+}

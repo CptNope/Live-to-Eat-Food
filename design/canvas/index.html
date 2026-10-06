@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Design canvas — Live to Eat Food</title>
+<link rel="icon" href="../../assets/logos/ltef-avatar-mustard.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Source+Serif+4:opsz,wght@8..60,400..600&amp;display=swap">
+<style>
+:root{--trim:#F6F6F1;--trim-2:#ECECE3;--asphalt:#1E1F1C;--ink-2:#4A4C45;--mustard:#F2B027;--red:#9C2F22;--blue:#2A4A6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--trim);color:var(--asphalt);font:500 16px/1.5 "Archivo",system-ui,sans-serif}
+a{color:inherit}
+.top{background:var(--asphalt);color:var(--trim);padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:center;font-size:14px;font-weight:600}
+.top a{color:var(--mustard)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+header.hero{background:var(--mustard);border-bottom:4px solid var(--asphalt);background-image:repeating-linear-gradient(0deg,transparent 0 22px,rgba(30,31,28,.06) 22px 24px)}
+header.hero .wrap{padding-top:clamp(32px,6vw,72px);padding-bottom:clamp(28px,5vw,56px)}
+.logo{display:block;width:96px;margin-bottom:28px}
+h1{font-weight:900;font-stretch:112%;font-size:clamp(40px,7vw,84px);line-height:.95;letter-spacing:-.02em;margin:0 0 18px}
+.lede{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(18px,2vw,21px);max-width:720px;margin:0}
+h2{font-weight:900;font-stretch:108%;font-size:clamp(26px,3.4vw,38px);line-height:1;margin:0 0 6px}
+.sec{padding:clamp(36px,5vw,64px) 0 0}
+.sec p.sub{margin:0 0 22px;color:var(--ink-2)}
+.grid{display:grid;gap:clamp(18px,2.4vw,28px)}
+.desk{grid-template-columns:repeat(3,minmax(0,1fr))}
+.phones{grid-template-columns:repeat(3,minmax(0,260px))}
+.card{display:flex;flex-direction:column;border:3px solid var(--asphalt);background:#fff;text-decoration:none}
+.card .shot{display:block;background:var(--trim-2);border-bottom:3px solid var(--asphalt);overflow:hidden}
+.card img{display:block;width:100%;height:auto}
+.desk .shot{aspect-ratio:16/10}
+.desk .shot img{height:100%;object-fit:cover;object-position:top}
+.phones .shot{aspect-ratio:390/844}
+.card .meta{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px}
+.card b{font-weight:800;font-size:18px}
+.card .meta span{color:var(--ink-2);font-size:14px}
+.card .links{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;font-weight:700;font-size:14px}
+a.shot:hover img,a.shot:focus-visible img{opacity:.88}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.files{margin:clamp(40px,5vw,64px) 0 clamp(48px,6vw,80px);padding:20px 22px;border:2px dashed var(--ink-2);background:var(--trim-2)}
+.files h2{font-size:24px;margin-bottom:10px}
+.files ul{margin:0;padding-left:20px}
+.files li{margin:4px 0}
+code{font:600 14px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;background:#fff;padding:1px 5px;border:1px solid #D4D5CC}
+@media (max-width:900px){.desk{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.phones{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<div class="top"><span>Concept sample · design canvas export</span><span><a href="../../index.html">Working site</a> · <a href="../../brand.html">Brand book</a></span></div>
+<header class="hero">
+  <div class="wrap">
+    <img class="logo" src="../../assets/logos/ltef-wordmark-asphalt.svg" alt="Live to Eat Food">
+    <h1>Design canvas</h1>
+    <p class="lede">The six artboards from the Live to Eat Food design canvas, exported as plain pages. Each one is clickable, and the links between them work the way they do on the canvas. Restaurants are real Worcester places; Tina's lines are short excerpts from her own TikTok captions, each linked to the post.</p>
+  </div>
+</header>
+<main class="wrap">
+  <section class="sec" aria-labelledby="d-h">
+    <h2 id="d-h">Desktop, 1440 wide</h2>
+    <p class="sub">Open one and click through: Home leads to a place page and a guide.</p>
+    <div class="grid desk">
+      <div class="card">
+        <a class="shot" href="home.html"><img src="screens/home.jpg" width="1440" height="900" alt="Home artboard: Where should we eat? sentence builder on mustard siding" loading="lazy"></a>
+        <div class="meta"><b>Home</b><span>Sentence search, Tina's latest, where she ate lately</span><div class="links"><a href="home.html">Open artboard</a></div></div>
+      </div>
+      <div class="card">
+        <a class="shot" href="place.html"><img src="screens/place.jpg" width="1440" height="900" alt="Place artboard: Chashu Ramen + Izakaya on blue siding" loading="lazy"></a>
+        <div class="meta"><b>Place</b><span>Chashu Ramen + Izakaya, with Tina's three posts</span><div class="links"><a href="place.html">Open artboard</a></div></div>
+      </div>
+      <div class="card">
+        <a class="shot" href="guide.html"><img src="screens/guide.jpg" width="1440" height="900" alt="Guide artboard: a Shrewsbury Street walking guide" loading="lazy"></a>
+        <div class="meta"><b>Guide</b><span>Shrewsbury Street, stop by stop</span><div class="links"><a href="guide.html">Open artboard</a></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="sec" aria-labelledby="p-h">
+    <h2 id="p-h">Phone, 390 wide</h2>
+    <p class="sub">Best seen in the phone frame, which keeps them at true phone width on a big screen.</p>
+    <div class="grid phones">
+      <div class="card">
+        <a class="shot" href="phone.html?b=home-phone"><img src="screens/home-phone.jpg" width="390" height="844" alt="Home artboard at phone width" loading="lazy"></a>
+        <div class="meta"><b>Home</b><div class="links"><a href="phone.html?b=home-phone">Phone frame</a><a href="home-phone.html">Full page</a></div></div>
+      </div>
+      <div class="card">
+        <a class="shot" href="phone.html?b=place-phone"><img src="screens/place-phone.jpg" width="390" height="844" alt="Place artboard at phone width" loading="lazy"></a>
+        <div class="meta"><b>Place</b><div class="links"><a href="phone.html?b=place-phone">Phone frame</a><a href="place-phone.html">Full page</a></div></div>
+      </div>
+      <div class="card">
+        <a class="shot" href="phone.html?b=guide-phone"><img src="screens/guide-phone.jpg" width="390" height="844" alt="Guide artboard at phone width" loading="lazy"></a>
+        <div class="meta"><b>Guide</b><div class="links"><a href="phone.html?b=guide-phone">Phone frame</a><a href="guide-phone.html">Full page</a></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="files" aria-labelledby="f-h">
+    <h2 id="f-h">What's in this folder</h2>
+    <ul>
+      <li><code>*.html</code>: the artboards as standalone pages, plus <code>phone.html</code>, the phone frame.</li>
+      <li><code>screens/</code>: the thumbnails on this page.</li>
+      <li><code>source/</code>: the canvas files exactly as they are in Claude: <code>canvas.json</code> (artboard layout), the six <code>*.dc.html</code> artboards, and the design system's <code>tokens.json</code> and component <code>bundle.css</code>.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

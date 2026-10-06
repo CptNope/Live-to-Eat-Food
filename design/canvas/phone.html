@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Phone frame — Live to Eat Food design canvas</title>
+<link rel="icon" href="../../assets/logos/ltef-avatar-mustard.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;display=swap">
+<style>
+:root{--trim:#F6F6F1;--asphalt:#1E1F1C;--mustard:#F2B027;--line:#4A4C45}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--asphalt);color:var(--trim);font:500 15px/1.45 "Archivo",system-ui,sans-serif}
+a{color:var(--mustard)}
+.bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #3A3B36}
+.bar b{font-weight:800}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs a{padding:6px 12px;border:2px solid var(--trim);color:var(--trim);text-decoration:none;font-weight:700;font-size:14px}
+.tabs a[aria-current="page"]{background:var(--mustard);border-color:var(--mustard);color:var(--asphalt)}
+.stage{display:flex;justify-content:center;padding:28px 16px 48px}
+.phone{width:414px;max-width:100%;padding:12px;background:#0F100E;border-radius:44px;box-shadow:0 0 0 2px #3A3B36,0 24px 60px rgba(0,0,0,.45)}
+.phone iframe{display:block;width:390px;max-width:100%;height:min(844px,calc(100vh - 170px));min-height:560px;border:0;border-radius:32px;background:var(--trim)}
+.note{max-width:640px;margin:0 auto;padding:0 16px 40px;color:#C9CAC2;font-size:14px;text-align:center}
+@media (max-width:440px){.phone{padding:0;border-radius:0;box-shadow:none;background:none}.phone iframe{border-radius:0;height:calc(100vh - 150px)}.stage{padding:0}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <span><b>Phone frame</b> · 390 × 844</span>
+  <nav class="tabs" aria-label="Phone artboards">
+    <a href="phone.html?b=home-phone" data-b="home-phone">Home</a>
+    <a href="phone.html?b=place-phone" data-b="place-phone">Place</a>
+    <a href="phone.html?b=guide-phone" data-b="guide-phone">Guide</a>
+  </nav>
+  <span><a href="index.html">All artboards</a> · <a href="../../index.html">Working site</a></span>
+</div>
+<div class="stage"><div class="phone"><iframe title="Phone artboard" src="home-phone.html"></iframe></div></div>
+<p class="note">Scroll inside the frame. Links between artboards work, and the tab above follows along.</p>
+<script>
+(function () {
+  var ok = { "home-phone": 1, "place-phone": 1, "guide-phone": 1 };
+  var b = new URLSearchParams(location.search).get("b");
+  if (!ok[b]) b = "home-phone";
+  var frame = document.querySelector("iframe");
+  var tabs = document.querySelectorAll(".tabs a");
+  function mark(name) {
+    for (var i = 0; i < tabs.length; i++) {
+      if (tabs[i].getAttribute("data-b") === name) tabs[i].setAttribute("aria-current", "page");
+      else tabs[i].removeAttribute("aria-current");
+    }
+  }
+  frame.src = b + ".html";
+  mark(b);
+  frame.addEventListener("load", function () {
+    try {
+      var d = frame.contentDocument;
+      var bar = d.querySelector(".canvas-bar");
+      if (bar) bar.style.display = "none";
+      var name = (frame.contentWindow.location.pathname.split("/").pop() || "").replace(".html", "");
+      if (ok[name]) { mark(name); history.replaceState(null, "", "phone.html?b=" + name); }
+    } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

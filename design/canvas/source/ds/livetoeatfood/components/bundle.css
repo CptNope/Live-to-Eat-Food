@@ -188,7 +188,7 @@ button,input,select{font:inherit;color:inherit}
 /* ---------- map ---------- */
 .mapgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;border:3px solid var(--asphalt)}
 .map{background:#E9E9E1;position:relative;min-height:600px;overflow:hidden}
-.map > svg{position:absolute;inset:0;width:100%;height:100%}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
 .maplist{background:var(--trim);border-left:3px solid var(--asphalt);display:flex;flex-direction:column}
 .maplist .tabs{display:flex;border-bottom:2px solid var(--asphalt)}
 .maplist .tabs button{flex:1;min-height:52px;border:0;background:none;font-weight:700;font-size:15px;cursor:pointer;border-right:2px solid var(--asphalt)}
@@ -260,7 +260,7 @@ button,input,select{font:inherit;color:inherit}
 .towns{margin-top:48px;padding-top:20px;border-top:2px solid rgba(246,246,241,.2);font-size:14px;color:#C9CAC2;display:flex;flex-wrap:wrap;gap:6px 22px}
 
 /* ---------- sample banner ---------- */
-.sample{margin:0;background:var(--asphalt);color:#E7E7DF;font-size:12.5px;font-weight:600;padding:8px var(--gut);display:flex;gap:10px;align-items:center;justify-content:center;text-align:center}
+.sample{background:var(--asphalt);color:#E7E7DF;font-size:12.5px;font-weight:600;padding:8px var(--gut);display:flex;gap:10px;align-items:center;justify-content:center;text-align:center}
 .sample b{color:var(--mustard)}
 
 /* ---------- mobile bar ---------- */
@@ -282,7 +282,7 @@ button,input,select{font:inherit;color:inherit}
 .door-floor{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,.9fr);gap:clamp(24px,3vw,48px);align-items:start}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .facts{display:grid;gap:0;border-top:2px solid var(--asphalt)}
-.facts div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:2px solid var(--trim-2);font-size:15px}
+.facts div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--trim-2);font-size:15px}
 .facts dt{font-weight:760}.facts dd{margin:0}
 .hours{font-variant-numeric:tabular-nums}
 .fresh{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-2);margin-top:14px}
@@ -311,16 +311,11 @@ button,input,select{font:inherit;color:inherit}
 
 /* ---------- responsive ---------- */
 @media (max-width:1100px){
-  .nav{gap:16px;margin-left:8px;font-size:14px}
-  .door-floor{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .door-floor .actions{flex-wrap:wrap}
-  .door-floor > :last-child{grid-column:1/-1;max-width:520px}
-  .search{display:none}
+  .nav{display:none}
   .street,.curb-names{grid-template-columns:repeat(3,minmax(0,1fr))}
   .lot{min-height:260px}
 }
 @media (max-width:760px){
-  .nav{display:none}
   body{font-size:15px;padding-bottom:76px}
   .top{gap:12px;padding-block:14px}
   .search{display:none}
@@ -361,7 +356,7 @@ button,input,select{font:inherit;color:inherit}
   .onscreen .what{font-size:18px}
   .line-plates span{font-size:22px;min-width:30px;padding:4px 5px 1px}
   .latest .note{top:-26px}
-  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--asphalt);color:var(--trim);border-top:4px solid var(--mustard);padding-bottom:env(safe-area-inset-bottom)}
+  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--asphalt);color:var(--trim);border-top:4px solid var(--mustard);padding-bottom:env(safe-area-inset-bottom)}
   .tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:64px;font-size:12.5px;font-weight:700;text-decoration:none;color:#C9CAC2}
   .tabbar a[aria-current]{color:var(--mustard)}
   .tabbar .ico{width:22px;height:22px}
@@ -375,7 +370,7 @@ button,input,select{font:inherit;color:inherit}
   .doorbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--asphalt);color:var(--trim);border-top:4px solid var(--blue);padding-bottom:env(safe-area-inset-bottom)}
   .doorbar a,.doorbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:64px;font-size:12.5px;font-weight:700;text-decoration:none;color:var(--trim);background:none;border:0;border-right:1px solid #3A3B36}
   .doorbar a:first-child{background:var(--trim);color:var(--asphalt)}
-  .p-hero .window{order:-1;margin-bottom:0 !important}
+  .p-hero .window{order:-1}
   .p-title{padding-bottom:28px}
   .plate.lg .n{font-size:96px}
 }
@@ -394,6 +389,7 @@ button,input,select{font:inherit;color:inherit}
   .paper{max-width:100%;transform:rotate(.8deg)}
   .reel{max-width:300px}
   .map{min-height:450px}
+  .map svg{width:190%;left:-45%}
   .stop.compact .info{grid-template-columns:minmax(0,1fr)}
   .stop.compact .info .labels{grid-row:auto}
 }
@@ -433,20 +429,3 @@ button,input,select{font:inherit;color:inherit}
   .latest{margin-bottom:-70px}
   .floor h2{font-size:20px}
 }
-
-/* ---------- concept navigation (GitHub Pages preview only) ---------- */
-.sample{flex-wrap:wrap}
-.concept-nav{display:inline-flex;gap:14px;flex-wrap:wrap;margin-left:8px}
-.concept-nav a{color:var(--mustard);font-weight:700;text-decoration:underline;text-underline-offset:.2em}
-
-/* ---------- faded siding for towns outside Worcester ---------- */
-.f-bluelt{background:var(--blue-lt);color:var(--asphalt)}
-.f-greenlt{background:var(--green-lt);color:var(--asphalt)}
-.f-bricklt{background:var(--brick-lt);color:var(--asphalt)}
-.house.f-bluelt,.house.f-greenlt,.house.f-bricklt{color:var(--asphalt);background-image:var(--clap)}
-.house .note small a,.note small a{color:inherit}
-a.ph{text-decoration:none}
-.reel .play{text-decoration:none}
-.reel-row a.ph{width:92px;min-height:0}
-@media (max-width:760px){.reel-row a.ph{width:auto;flex:1}}
-@media (max-width:760px){.latest{margin-bottom:0}}
